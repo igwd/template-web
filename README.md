@@ -1,3 +1,17 @@
+### Setup PHP environtment
+
+First installation :
+
+```sh
+composer install
+```
+
+Update Composer :
+
+```sh
+composer update
+```
+
 ### Getting Started
 
 ```sh
