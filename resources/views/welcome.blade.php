@@ -5,6 +5,7 @@
         @livewire('component.front.navbar')
         @livewire('component.front.carousel')
         @livewire('component.front.hero-section')
+        @livewire('component.front.news')
         <div class="flex items-center justify-center">
             {{-- <div class="flex flex-col justify-around">
                 <div class="space-y-6">
