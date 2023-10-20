@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@prettier/plugin-php": "^0.21.0",
+        "aos": "^2.3.4",
         "tw-elements": "^1.0.0"
     }
 }

@@ -4,7 +4,8 @@
     <div class="flex flex-col min-h-screen bg-gray-100">
         @livewire('component.front.navbar')
         @livewire('component.front.carousel')
-        @livewire('component.front.hero-section')
+        @livewire('component.front.info.search')
+        @livewire('component.front.info.info-base')
         <div class="flex items-center justify-center">
             {{-- <div class="flex flex-col justify-around">
                 <div class="space-y-6">
