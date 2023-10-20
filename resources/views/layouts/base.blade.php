@@ -15,8 +15,11 @@
 
     <!-- Fonts -->
     {{-- <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> --}}
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+=======
+>>>>>>> master
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
@@ -28,10 +31,13 @@
 
 <body>
     @yield('body')
+<<<<<<< HEAD
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
+=======
+>>>>>>> master
 </body>
 
 </html>
