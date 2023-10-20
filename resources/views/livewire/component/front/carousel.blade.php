@@ -120,7 +120,7 @@
                     <p class="text-3xl font-poppins">Selamat datang di</p>
                     <p class="text-5xl mb-4 mt-4 text-yellow-300 font-lobster">Fakultas Teknik dan Perencanaan</p>
                     <p class="text-4xl">Universitas Warmadewa</p>
-                    <p class="mt-20 text-base font-poppins">Fakultas Teknik dan Perencanaan di Universitas Warmadewa
+                    <p class="mt-20 text-lg font-poppins">Fakultas Teknik dan Perencanaan di Universitas Warmadewa
                         adalah
                         salah satu
                         fakultas yang berfokus
@@ -193,7 +193,6 @@
                     <img src="{{ asset('img/arduino.jpg') }}" alt="" srcset=""
                         class="h-full object-cover object-center">
                 </div>
-
             </div>
         </div>
         <label for="carousel-2"
