@@ -21,7 +21,7 @@
         opacity: 0;
         -webkit-transition: opacity 0.6s ease-out;
         transition: opacity 0.6s ease-out;
-        <<<<<<< HEAD background-color: #191919
+        background-color: #191919
     }
 
     .carousel-item div {
@@ -33,15 +33,6 @@
         height: 100%;
         object-fit: contain;
         object-position: center; */
-        =======height: 70vh;
-    }
-
-    .carousel-item img {
-        display: block;
-        height: 100%;
-        object-fit: contain;
-        object-position: center;
-        >>>>>>>master
     }
 
     .carousel-control {
