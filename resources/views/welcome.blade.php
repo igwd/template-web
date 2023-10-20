@@ -6,6 +6,7 @@
         @livewire('component.front.carousel')
         @livewire('component.front.info.search')
         @livewire('component.front.info.info-base')
+        @livewire('component.front.news.news-base')
         <div class="flex items-center justify-center">
             {{-- <div class="flex flex-col justify-around">
                 <div class="space-y-6">

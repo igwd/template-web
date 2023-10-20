@@ -37,3 +37,9 @@ Terminal 2
 ```sh
 npm run dev
 ```
+
+### Create a file
+
+```
+php artisan make:livewire component.front.news.news-base
+```
