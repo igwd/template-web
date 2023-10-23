@@ -7,7 +7,7 @@
         }
     </style>
 
-    <section class="container-news flex flex-col">
+    <section class="container-news flex flex-col bg-white dark:bg-gray-900">
         <div
             class="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px">
@@ -20,18 +20,20 @@
         <div class="flex flex-1">
             <div class="w-1/2 h-ful text-gray-500 p-5 flex flex-col">
 
-                <figure class="card-zoom">
-                    <img class="card-zoom-image h-96 w-full rounded-lg over:scale-110 transition duration-500 object-cover"
+                <figure class="card-zoom-news">
+                    <img class="card-zoom-image w-full rounded-lg over:scale-110 transition duration-500 object-cover"
                         src="https://www.teknik.warmadewa.ac.id/public/uploads/berita/Berita_232708070811_.jpg"
                         alt="">
                 </figure>
-                <span class=" text-xs text-gray-500 truncate dark:text-gray-400">
+                <span class=" text-xs text-gray-500 truncate dark:text-gray-400 mt-3">
                     1 Juni 2023
                 </span>
-                <h2 class="text-lg text-gray-900 font-bold">Pelatihan BIM oleh Balai Jasa Konstruksi Wilayah IV Surabaya
+                <h2 class="text-lg text-gray-900 dark:text-white font-bold">Pelatihan BIM oleh Balai Jasa Konstruksi
+                    Wilayah IV Surabaya
                 </h2>
                 <div class="flex-1 mt-5">
-                    <p class="">Telah berlangsung pelatihan BIM yg difasilitasi oleh Balai Jasa Konstruksi Wilayah
+                    <p class=" text-gray-600 dark:text-gray-300">Telah berlangsung pelatihan BIM yg difasilitasi oleh
+                        Balai Jasa Konstruksi Wilayah
                         IV
                         Surabaya selama 6
                         hari penuh.

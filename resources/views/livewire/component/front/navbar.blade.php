@@ -63,7 +63,7 @@
                     </button>
                     <div class="flex items-center">
                         <button type="button" data-dropdown-toggle="language-dropdown-menu"
-                            class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-white">
+                            class="dark:bg-gray-600 inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-white">
                             <svg class="h-3.5 w-3.5 rounded-full mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-it" viewBox="0 0 512 512">
                                 <g fill-rule="evenodd" stroke-width="1pt">
