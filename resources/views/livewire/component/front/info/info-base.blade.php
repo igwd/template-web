@@ -9,11 +9,12 @@
 
     <section
         class="container-info flex bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
-        <div class="w-2/5 h-full text-white p-5 text-center flex items-center flex-col justify-center">
+        <div class="w-2/5 h-full text-white p-5 text-center flex items-center flex-col justify-center" data-aos="fade-up"
+            data-aos-anchor-placement="center-bottom">
             <h1 class="text-4xl font-lobster">Explore Fakultas Teknik dan Perencanaan Warmadewa</h1>
             <p class="m-5 text-xl font-dancing">Berwawasan Ekowisata dan Berdaya Saing Global</p>
         </div>
-        <div class="w-3/5 h-full grid grid-cols-2 items-center justify-center bt">
+        <div class="w-3/5 h-full grid grid-cols-2 items-center justify-center bt " data-aos="fade-up">
             <div
                 class="pl-2 border-b-2 border-r-2 border-gray-200 hover:bg-white cursor-pointer w-full h-full flex items-center text-white hover:text-gray-900 ">
                 <svg class="w-10 mr-2" fill="currentColor" viewBox="0 0 32 32" enable-background="new 0 0 32 32"
