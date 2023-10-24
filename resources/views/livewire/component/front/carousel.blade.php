@@ -138,7 +138,8 @@
                                     <path
                                         d="M3.414 1A2 2 0 0 0 0 2.414v11.172A2 2 0 0 0 3.414 15L9 9.414a2 2 0 0 0 0-2.828L3.414 1Z" />
                                 </svg>
-                                Teknik Sipil
+                                <a href="#sipil">Teknik Sipil</a>
+
                             </li>
                             <li class="text-gray-200 hover:text-blue-500 transition cursor-pointer text-xl list-none"
                                 data-aos="fade-up" data-aos-duration="2000" data-aos-anchor-placement="top-bottom">
@@ -147,7 +148,7 @@
                                     <path
                                         d="M3.414 1A2 2 0 0 0 0 2.414v11.172A2 2 0 0 0 3.414 15L9 9.414a2 2 0 0 0 0-2.828L3.414 1Z" />
                                 </svg>
-                                Arsitektur
+                                <a href="#arsitektur">Arsitektur</a>
                             </li>
                             <li class="text-gray-200 hover:text-blue-500 transition cursor-pointer text-xl list-none"
                                 data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="top-bottom">
@@ -156,8 +157,8 @@
                                     <path
                                         d="M3.414 1A2 2 0 0 0 0 2.414v11.172A2 2 0 0 0 3.414 15L9 9.414a2 2 0 0 0 0-2.828L3.414 1Z" />
                                 </svg>
-                                Teknik
-                                Komputer
+                                <a href="#komputer"> Teknik
+                                    Komputer</a>
                             </li>
                         </ul>
                     </div>
