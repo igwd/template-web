@@ -160,6 +160,16 @@
                                 <a href="#komputer"> Teknik
                                     Komputer</a>
                             </li>
+                            <li class="text-gray-200 hover:text-blue-500 transition cursor-pointer text-xl list-none"
+                                data-aos="fade-up" data-aos-duration="3000" data-aos-anchor-placement="top-bottom">
+                                <svg class="text-blue-500 inline w-3 h-3 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 16">
+                                    <path
+                                        d="M3.414 1A2 2 0 0 0 0 2.414v11.172A2 2 0 0 0 3.414 15L9 9.414a2 2 0 0 0 0-2.828L3.414 1Z" />
+                                </svg>
+                                <a href="#insinyur">Profesi
+                                    Insinyur</a>
+                            </li>
                         </ul>
                     </div>
                     <div class=" w-1/2">
