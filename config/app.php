@@ -209,6 +209,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Formatting'=>App\Helpers\Formatting::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

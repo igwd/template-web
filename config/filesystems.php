@@ -44,6 +44,31 @@ return [
             'throw' => false,
         ],
 
+        'carousel' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/carousel'),
+            'url' => '/storage/carousel',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'news' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/news'),
+            'url' => '/storage/news',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        //announcement
+        'announcement' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/announcement'),
+            'url' => '/storage/announcement',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
