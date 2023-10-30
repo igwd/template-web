@@ -1,7 +1,6 @@
 <div>
     <nav class="bg-white border-gray-200 dark:border-gray-600 dark:bg-gray-900 fixed z-50 w-full shadow-md">
-
-        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 w-full">
             <a href="https://www.teknik.warmadewa.ac.id/" class="flex items-center ">
                 <img src="{{ asset('img/logo-warmadewa.png') }}" class=" h-10 mr-3" alt="Teknik Unwar Logo" />
                 <span
