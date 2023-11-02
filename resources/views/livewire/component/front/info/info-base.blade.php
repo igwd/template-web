@@ -11,7 +11,7 @@
         class="container-info flex bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
         <div class="w-2/5 h-full text-white p-5 text-center flex items-center flex-col justify-center" data-aos="fade-up"
             data-aos-anchor-placement="center-bottom">
-            <h1 class="text-4xl font-lobster">Explore Fakultas Teknik dan Perencanaan Warmadewa</h1>
+            <h1 class=" text-2xl md:text-4xl font-lobster">Explore Fakultas Teknik dan Perencanaan Warmadewa</h1>
             <p class="m-5 text-xl font-dancing">Berwawasan Ekowisata dan Berdaya Saing Global</p>
         </div>
         <div class="w-3/5 h-full grid grid-cols-2 items-center justify-center bt " data-aos="fade-up">
@@ -40,8 +40,8 @@
                     </g>
                 </svg>
 
-                <a class="text-xl duration-300 font-poppins" href="https://warmadewa.ac.id/info_penmaru" target="_blank"
-                    rel="noopener noreferrer">Info Penerimaan Mahasiswa Baru</a>
+                <a class="text-sm md:text-xl duration-300 font-poppins" href="https://warmadewa.ac.id/info_penmaru"
+                    target="_blank" rel="noopener noreferrer">Info Penerimaan Mahasiswa Baru</a>
             </div>
             <div
                 class="pl-2 border-b-2 border-r-2 border-gray-200 hover:bg-white w-full h-full flex items-center text-white hover:text-gray-900 ">
@@ -55,7 +55,7 @@
                             transform="translate(-46 -28)"></path>
                     </g>
                 </svg>
-                <a class="text-xl duration-300 font-poppins"
+                <a class="text-sm md:text-xl duration-300 font-poppins"
                     href="https://sipenmaru.warmadewa.ac.id/index.php/csipenmaru/sipenmaru/75d988845141256e08c27571532a0ea213508eddc864b9e98866d4b6e930bf55185df63e56bec3af9d78cb4aec4a783ae40786751f2a803cd9bf4119194efb9922hmuhdpVFxlmHiexbm0jESz3ksDaIlKRH5Mc1dH0b5WnF6FTUOXfCKlQ2nOpcETGYoY2iASfRl5GlNl3sOE/w=="
                     target="_blank" rel="noopener noreferrer">Seleksi Penerimaan Mahasiswa Baru</a>
             </div>
@@ -77,8 +77,8 @@
                         <line x1="28.6" y1="29.66" x2="49.42" y2="29.66"></line>
                     </g>
                 </svg>
-                <a class="text-xl duration-300 font-poppins" href="https://simone.warmadewa.ac.id/" target="_blank"
-                    rel="noopener noreferrer">Sistem Informasi Mahasiswa Online</a>
+                <a class="text-sm md:text-xl duration-300 font-poppins" href="https://simone.warmadewa.ac.id/"
+                    target="_blank" rel="noopener noreferrer">Sistem Informasi Mahasiswa Online</a>
             </div>
             <div
                 class="pl-2 border-b-2 border-r-2 border-gray-200 hover:bg-white w-full h-full flex items-center text-white hover:text-gray-900 ">
@@ -112,8 +112,9 @@
                     </g>
                 </svg>
 
-                <a class="text-xl duration-300 font-poppins" href="https://www.teknik.warmadewa.ac.id/video"
-                    target="_blank" rel="noopener noreferrer">Kehidupan Aktivitas Kampus</a>
+                <a class="text-sm md:text-xl duration-300 font-poppins"
+                    href="https://www.teknik.warmadewa.ac.id/video" target="_blank"
+                    rel="noopener noreferrer">Kehidupan Aktivitas Kampus</a>
             </div>
             <div
                 class="pl-2 border-b-2 border-r-2 border-gray-200 hover:bg-white w-full h-full flex items-center text-white hover:text-gray-900 ">
@@ -156,7 +157,7 @@
                             x1="8" y1="8" x2="12" y2="8"></line>
                     </g>
                 </svg>
-                <a class="text-xl duration-300 font-poppins" href="/" target="_blank"
+                <a class="text-sm md:text-xl duration-300 font-poppins" href="/" target="_blank"
                     rel="noopener noreferrer">Badan Eksekutif Mahasiswa</a>
             </div>
             <div
@@ -173,7 +174,7 @@
                     </g>
                 </svg>
 
-                <a class="text-xl duration-300 font-poppins" href="/" target="_blank"
+                <a class="text-sm md:text-xl duration-300 font-poppins" href="/" target="_blank"
                     rel="noopener noreferrer">Badan Perwakilan Mahasiswa</a>
             </div>
             <div
@@ -189,12 +190,12 @@
                         </path>
                     </g>
                 </svg>
-                <a class="text-xl duration-300 font-poppins" href="/" target="_blank"
+                <a class="text-sm md:text-xl duration-300 font-poppins" href="/" target="_blank"
                     rel="noopener noreferrer">Unit Kegiatan Mahasiswa</a>
             </div>
             <div
                 class="pl-2 border-b-2 border-r-2 border-gray-200 hover:bg-white w-full h-full flex items-center text-white hover:text-gray-900 ">
-                <svg class="w-7 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-3 md:w-7 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -208,12 +209,13 @@
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
                     </g>
                 </svg>
-                <a class="text-xl duration-300 font-poppins" href="/" target="_blank"
+                <a class="text-sm md:text-xl duration-300 font-poppins" href="/" target="_blank"
                     rel="noopener noreferrer">Foto Galeri</a>
             </div>
             <div
                 class="pl-2 border-b-2 border-r-2 border-gray-200 hover:bg-white w-full h-full flex items-center text-white hover:text-gray-900 ">
-                <svg class="w-7 mr-2" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <svg class="w-3 md:w-7 mr-2" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -223,8 +225,9 @@
                         </path>
                     </g>
                 </svg>
-                <a class="text-xl duration-300 font-poppins" href="https://www.teknik.warmadewa.ac.id/berita/"
-                    target="_blank" rel="noopener noreferrer">Berita Terkini</a>
+                <a class="text-sm md:text-xl duration-300 font-poppins"
+                    href="https://www.teknik.warmadewa.ac.id/berita/" target="_blank"
+                    rel="noopener noreferrer">Berita Terkini</a>
             </div>
         </div>
     </section>
