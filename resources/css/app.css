@@ -42,7 +42,7 @@ html {
     @apply absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
 }
 .card-zoom-text {
-    @apply absolute bottom-1 text-xs text-center transition-all duration-500 ease-in-out transform scale-75 text-white opacity-60;
+    @apply absolute bottom-1 text-xl font-bold text-center transition-all duration-500 ease-in-out transform scale-75 text-white opacity-60;
 }
 .card-zoom:hover .card-zoom-image {
     @apply scale-150;
