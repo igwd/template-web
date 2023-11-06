@@ -158,7 +158,7 @@
         <div id="mega-menu-full-image-dropdown"
             class=" hidden w-full bg-white border-gray-200 shadow-sm border-y dark:bg-gray-800 dark:border-gray-600 absolute z-50">
             <div
-                class="grid max-h-64 overflow-y-auto md:overflow-hidden md:max-w-screen-xl px-4 py-5 mx-auto text-sm text-gray-500 dark:text-gray-400 md:grid-cols-3 md:px-6">
+                class="grid max-h-96 overflow-y-auto md:overflow-hidden md:max-w-screen-xl px-4 py-5 mx-auto text-sm text-gray-500 dark:text-gray-400 md:grid-cols-3 md:px-6">
                 <ul class="mb-4 space-y-4 md:mb-0 md:block" aria-labelledby="mega-menu-full-image-button">
                     <li>
                         <a href="#" class="hover:underline hover:text-blue-600 dark:hover:text-blue-500">
