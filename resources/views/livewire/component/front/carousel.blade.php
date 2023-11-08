@@ -261,4 +261,29 @@
 
         </div>
     </div>
+    <script>
+        function autoAdvanceCarousel() {
+            const radios = document.querySelectorAll('.carousel-open');
+            let currentRadio = document.querySelector('.carousel-open:checked');
+            const radioCount = radios.length;
+
+            setInterval(() => {
+
+                const currentIndex = Array.from(radios).indexOf(currentRadio);
+
+
+                const nextIndex = (currentIndex + 1) % radioCount;
+                const nextRadio = radios[nextIndex];
+
+
+                currentRadio.checked = false;
+                nextRadio.checked = true;
+
+
+                currentRadio = nextRadio;
+            }, 5000);
+        }
+
+        window.addEventListener('load', autoAdvanceCarousel);
+    </script>
 </div>
