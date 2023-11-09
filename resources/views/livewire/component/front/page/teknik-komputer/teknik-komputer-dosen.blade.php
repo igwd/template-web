@@ -4,7 +4,7 @@
     </style>
 
     <div class=" flex flex-col items-center">
-        <h1 class="text-xl font-bold text-center mb-5">Dosen Teknik Komputer</h1>
+        <h1 class="text-xl font-bold text-center mb-5 text-bg-dark dark:text-white">Dosen Teknik Komputer</h1>
 
         <div class="grid gap-10 grid-cols-1 md:grid-cols-3 text-bg-dark dark:text-white">
             <div
