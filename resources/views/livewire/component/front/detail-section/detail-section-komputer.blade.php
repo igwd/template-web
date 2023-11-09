@@ -1,6 +1,6 @@
 <div>
     <section id="komputer"
-        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 pt-6 md:pt-36 px-20 bg-white dark:bg-gray-900 ">
+        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 pt-6 md:pt-36 px-10 md:px-20 bg-white dark:bg-gray-900 ">
         <img src="{{ asset('img/arduino.jpg') }}" alt="" srcset=""
             class=" m-auto h-72 object-cover object-center" data-aos="zoom-in">
         <div class="text-gray-900 dark:text-white" data-aos="zoom-in-left">
