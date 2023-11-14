@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories'); // Adjust the 'categories' table name
             $table->string('tags')->nullable();
+            $table->string('tags_en')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by');
             $table->timestamps();

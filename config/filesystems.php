@@ -38,8 +38,16 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('app/public/uploads'),
+            'url' => env('APP_URL').'storage',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'uploads' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads'),
+            'url' => env('APP_URL').'storage/uploads',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -47,7 +55,7 @@ return [
         'carousel' => [
             'driver' => 'local',
             'root' => storage_path('app/public/carousel'),
-            'url' => '/storage/carousel',
+            'url' => env('APP_URL').'storage/carousel',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -55,7 +63,15 @@ return [
         'news' => [
             'driver' => 'local',
             'root' => storage_path('app/public/news'),
-            'url' => '/storage/news',
+            'url' => env('APP_URL').'storage/news',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'infobase' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/infobase'),
+            'url' => env('APP_URL').'storage/infobase',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -64,7 +80,7 @@ return [
         'announcement' => [
             'driver' => 'local',
             'root' => storage_path('app/public/announcement'),
-            'url' => '/storage/announcement',
+            'url' => env('APP_URL').'storage/announcement',
             'visibility' => 'public',
             'throw' => false,
         ],

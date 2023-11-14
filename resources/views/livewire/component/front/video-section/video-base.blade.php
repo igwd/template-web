@@ -4,8 +4,8 @@
             width: 100%;
             height: 50vh;
             padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
@@ -31,13 +31,13 @@
             }
         }
     </style>
-    <div class="container-video-mars ">
-        <div class=" h-full">
+    <div class="container-video-mars bg-white dark:bg-gray-900 ">
+        <div class="h-full">
             <video class="w-full h-full max-w-full border border-gray-200 rounded-lg dark:border-gray-700" controls>
                 <source type="video/mp4" src="{{ asset('video/mars-teknik.mp4') }}#t=2">
             </video>
         </div>
-        <div class="lyrics-container dark:bg-bg-dark border rounded-md">
+        <div class="lyrics-container rounded-md">
             <div class="lyrics font-dancing dark:text-white text-lg flex flex-col gap-10 text-center">
                 <h1 class="text-2xl font-lobster mt-20">Mars Teknik Warmadewa </h1>
                 <p>Berjuang menggapai cita</p>

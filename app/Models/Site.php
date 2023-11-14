@@ -20,11 +20,48 @@ class Site extends Model
     protected $fillable = [
         'slug',
         'name',
+        'logo',
+        'side_logo_1',
+        'side_logo_2',
+        'header',
+        'header_en',
+        'sub_header',
+        'sub_header_en',
         'description',
-        'section',
+        'sections',
         'created_by',
         'updated_by',
     ];
 
     public $timestamps = true;
+
+    public function scopeId($query){
+        return $query->select(
+            'id',
+            'slug',
+            'name',
+            'header',
+            'sub_header',
+            'description',
+            'sections',
+            'logo'
+        );
+    }
+
+    public function scopeEn($query){
+        return $query->select(
+            'id',
+            'slug',
+            'name',
+            'header_en as header',
+            'sub_header_en as sub_header',
+            'description_en as description',
+            'sections',
+            'logo'
+        );
+    }
+
+    public function navigations(){
+        return $this->hasMany(Navigation::class, 'site_id', 'id');
+    }
 }

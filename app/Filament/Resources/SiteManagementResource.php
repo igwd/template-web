@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Filament\Resources;
-
-use App\Filament\Resources\SiteManagementResource\Pages;
-use App\Filament\Resources\SiteManagementResource\RelationManagers;
+use Filament;
 use App\Models\Site;
-use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SiteManagementResource\Pages;
+use App\Filament\Resources\SiteManagementResource\RelationManagers;
 
 class SiteManagementResource extends Resource
 {
@@ -21,7 +19,7 @@ class SiteManagementResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-template';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
 
     protected static ?string $navigationLabel = "Website";
 
@@ -37,18 +35,20 @@ class SiteManagementResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Filament\Tables\Columns\TextColumn::make('name'),
+                Filament\Tables\Columns\TextColumn::make('slug'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                Filament\Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Filament\Tables\Actions\EditAction::make(),
+                Filament\Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
+                Filament\Tables\Actions\DeleteBulkAction::make(),
+                Filament\Tables\Actions\ForceDeleteBulkAction::make(),
+                Filament\Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
     

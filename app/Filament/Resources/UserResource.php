@@ -1,31 +1,33 @@
 <?php
 
 namespace App\Filament\Resources;
-
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use Filament;
 use App\Models\User;
-use Filament\Forms;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\UserResource\RelationManagers;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = "Access Control";
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('email')->email()->required()->unique(),
-                Forms\Components\TextInput::make('password')->password()->required(),
+                Filament\Forms\Components\TextInput::make('name')->required(),
+                Filament\Forms\Components\TextInput::make('email')->email()->required()->unique(),
+                Filament\Forms\Components\TextInput::make('password')->password()->required(),
             ]);
     }
 
@@ -33,17 +35,17 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
+                Filament\Tables\Columns\TextColumn::make('name'),
+                Filament\Tables\Columns\TextColumn::make('email'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Filament\Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                Filament\Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     

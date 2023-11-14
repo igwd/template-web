@@ -2,13 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
+use Filament;
 use App\Models\Site;
-use Filament\Tables;
+
+use Filament\Forms\Form;
 use App\Models\MCarousel;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Resources\Resource;
+
+use Filament\Forms\Components\Fieldset;
+use Illuminate\Support\Facades\Storage;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CarouselResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -20,36 +25,43 @@ class CarouselResource extends Resource
 
     protected static ?string $navigationGroup = "Site Management";
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Carousels';
+
+    protected static ?string $modelLabel = 'Carousels Widget';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('heading_sm')
+                Filament\Forms\Components\TextInput::make('heading_sm')
                     ->maxLength(100),
-                Forms\Components\TextInput::make('heading_lg')
+                Filament\Forms\Components\TextInput::make('heading_lg')
                     ->maxLength(100),
-                Forms\Components\TextInput::make('heading_md')
+                Filament\Forms\Components\TextInput::make('heading_md')
                     ->maxLength(100),
-                Forms\Components\MarkdownEditor::make('description')
+                Filament\Forms\Components\MarkdownEditor::make('description')
                     ->columnSpanFull()
                     ->disableToolbarButtons([
                         'attachFiles',
                     ]),
-                Forms\Components\FileUpload::make('bgimage')
-                    ->label('Background')
-                    ->disk('carousel')
-                    ->columnSpanFull(),
-                Forms\Components\Select::make('site_id')
-                ->label('Site')
-                ->options(Site::all()->pluck('name', 'id'))
-                ->searchable()
+                Filament\Forms\Components\FileUpload::make('bgimage')
+                ->label('Background')
+                ->disk('carousel')
+                ->image()
+                ->imageEditor()
                 ->columnSpanFull(),
+                Fieldset::make('Site Owner')
+                ->schema([
+                    Filament\Forms\Components\Select::make('site')
+                    ->relationship('site','name')
+                    ->label('Site')
+                    ->searchable()
+                    ->columnSpanFull(),
+                ])
             ])->columns(3);
     }
 
@@ -57,21 +69,30 @@ class CarouselResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('bgimage')->disk('carousel')->size(100)->label("Image"),
-                Tables\Columns\ViewColumn::make('description')->view('tables.columns.carousel')->sortable(),
-                Tables\Columns\TextColumn::make('sectionOwner.name')->label('Site Owner'),
+                Filament\Tables\Columns\ImageColumn::make('bgimage')->disk('carousel')->size(100)->label("Image"),
+                Filament\Tables\Columns\ViewColumn::make('description')->view('tables.columns.carousel')->sortable(),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
+                Filament\Tables\Filters\SelectFilter::make('Site Owner')->relationship('site', 'name')->columnSpan(1),
+            ],layout: FiltersLayout::AboveContent)
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Filament\Tables\Actions\ReplicateAction::make(),
+                Filament\Tables\Actions\EditAction::make(),
+                Filament\Tables\Actions\DeleteAction::make()
+                    ->before(function(MCarousel $record){
+                     // delete file
+                     Storage::disk('carousel')->delete($record->bgimage);    
+                }),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
+                Filament\Tables\Actions\DeleteBulkAction::make(),
+                Filament\Tables\Actions\ForceDeleteBulkAction::make(),
+                Filament\Tables\Actions\RestoreBulkAction::make(),
             ]);
+    }
+
+    protected function getTableFiltersFormWidth(): string{
+        return '4xl';
     }
     
     public static function getRelations(): array

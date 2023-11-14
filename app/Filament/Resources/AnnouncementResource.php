@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
+
 use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use App\Models\Announcement;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -18,7 +18,7 @@ class AnnouncementResource extends Resource
 {
     protected static ?string $model = Announcement::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-chat-alt';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
     protected static ?string $navigationGroup = "Berita & Pengumuman";
 

@@ -1,6 +1,12 @@
 import './bootstrap';
 import 'flowbite';
 
-import Alpine from 'alpinejs'
-window.Alpine = Alpine
-Alpine.start()
+import Aos from 'aos';
+
+document.addEventListener('DOMContentLoaded', function () {
+    Aos.init();
+});
+
+document.addEventListener('livewire:navigated', function () {
+    Aos.init();
+});

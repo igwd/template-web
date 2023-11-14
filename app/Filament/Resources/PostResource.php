@@ -3,12 +3,13 @@
 namespace App\Filament\Resources;
 
 use Closure;
-use Filament\Forms;
+use Filament;
+
 use App\Models\Post;
 use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use Filament\Resources\Form;
-use Filament\Resources\Table;
 use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
