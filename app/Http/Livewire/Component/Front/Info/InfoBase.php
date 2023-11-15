@@ -13,10 +13,14 @@ class InfoBase extends Component
     public $infobase = [];
     public $lang;
 
-    public function mount(){
+    public function mount($slug=null){
         $this->lang = Formatting::getLang();
-        $this->infobase = MInfoBase::id()->whereHas('site', function ($query) {
-            $query->where('is_main_site', 1);
+        $this->infobase = MInfoBase::id()->whereHas('site', function ($query) use($slug) {
+            if(!empty($slug)){
+                $query->where('slug', $slug);
+            }else{
+                $query->where('is_main_site', 1);
+            }
         })->first()->toArray();
         
         $this->infobase['sections'] = json_decode($this->infobase['sections'],true);
@@ -27,8 +31,12 @@ class InfoBase extends Component
         }, $this->infobase['sections']);
         
         if($this->lang == 'en'){
-            $this->infobase = MInfoBase::en()->whereHas('site', function ($query) {
-                $query->where('is_main_site', 1);
+            $this->infobase = MInfoBase::en()->whereHas('site', function ($query) use($slug) {
+                if(!empty($slug)){
+                    $query->where('slug', $slug);
+                }else{
+                    $query->where('is_main_site', 1);
+                }
             })->first()->toArray();
 
             $this->infobase['sections'] = json_decode($this->infobase['sections'],true);

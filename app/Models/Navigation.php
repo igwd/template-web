@@ -40,6 +40,9 @@ class Navigation extends Model
     }
 
     public function scopeEn($query){
-        return $query->select("id","parent",'name_en as name','sort','link');
+        return $query->select("id","parent",'name_en as name','sort','link')->orderBy('sort');
+    }
+    public function scopeId($query){
+        return $query->select("id","parent",'name','sort','link')->orderBy('sort');
     }
 }

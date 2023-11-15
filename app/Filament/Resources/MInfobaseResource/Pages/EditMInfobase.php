@@ -23,12 +23,12 @@ class EditMInfobase extends EditRecord
     {
         $data['updated_by'] = auth()->id();
         $data['updated_at'] = now();
-        if($data['background']){
+        if(!empty($data['background'])){
             $oldbg = $record->background;
-            Storage::disk('infobase')->delete($oldbg);
+            if(!empty($oldbg)){
+                Storage::disk('infobase')->delete($oldbg);
+            }
         }
-        /* $data['thumbnail_meta'] = $data['title'];
-        $data['thumbnail_meta_en'] = $data['title_en']; */
         $record->update($data);
         return $record;
     }

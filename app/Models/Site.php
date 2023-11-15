@@ -29,8 +29,16 @@ class Site extends Model
         'sub_header_en',
         'description',
         'sections',
+        'is_main_site',
+        'is_active',
         'created_by',
         'updated_by',
+    ];
+
+    protected $hidden = ['is_main_site','is_active','created_by','updated_by','deleted_at'];
+
+    protected $casts = [
+        'is_main_site' => 'boolean',
     ];
 
     public $timestamps = true;
@@ -45,7 +53,7 @@ class Site extends Model
             'description',
             'sections',
             'logo'
-        );
+        )->where('is_active',1);
     }
 
     public function scopeEn($query){
@@ -58,7 +66,7 @@ class Site extends Model
             'description_en as description',
             'sections',
             'logo'
-        );
+        )->where('is_active',1);
     }
 
     public function navigations(){

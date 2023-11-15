@@ -54,7 +54,6 @@ class NavigationResource extends Resource
         return $table
             ->columns([
                 Filament\Tables\Columns\TextColumn::make('name')->label('Navigation')->searchable(),
-                Filament\Tables\Columns\TextColumn::make('nav_parent.name')->label('Parent Navigation')->searchable(),
                 Filament\Tables\Columns\TextColumn::make('sort'),
                 Filament\Tables\Columns\TextColumn::make('link'),
                 Filament\Tables\Columns\TextColumn::make('external_link'),
@@ -69,7 +68,7 @@ class NavigationResource extends Resource
             ])
             ->bulkActions([
                 Filament\Tables\Actions\DeleteBulkAction::make(),
-            ]);
+            ])->groups(['nav_parent.name']);
     }
     
     public static function getRelations(): array

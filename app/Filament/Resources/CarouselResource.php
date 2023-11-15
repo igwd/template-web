@@ -10,6 +10,7 @@ use App\Models\MCarousel;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
 use Illuminate\Support\Facades\Storage;
 use Filament\Tables\Columns\ImageColumn;
@@ -18,6 +19,9 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CarouselResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarouselResource\RelationManagers;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 
 class CarouselResource extends Resource
 {
@@ -38,22 +42,47 @@ class CarouselResource extends Resource
         return $form
             ->schema([
                 Filament\Forms\Components\TextInput::make('heading_sm')
-                    ->maxLength(100),
+                ->maxLength(100),
                 Filament\Forms\Components\TextInput::make('heading_lg')
-                    ->maxLength(100),
+                ->maxLength(100),
                 Filament\Forms\Components\TextInput::make('heading_md')
-                    ->maxLength(100),
+                ->maxLength(100),
+                Filament\Forms\Components\TextInput::make('heading_sm_en')
+                ->maxLength(100)
+                ->label('Heading sm (EN)'),
+                Filament\Forms\Components\TextInput::make('heading_lg_en')
+                ->maxLength(100)
+                ->label('Heading lg (EN)'),
+                Filament\Forms\Components\TextInput::make('heading_md_en')
+                ->label('Heading md (EN)')
+                ->maxLength(100),
                 Filament\Forms\Components\MarkdownEditor::make('description')
-                    ->columnSpanFull()
-                    ->disableToolbarButtons([
-                        'attachFiles',
-                    ]),
+                ->columnSpanFull()
+                ->disableToolbarButtons([
+                    'attachFiles',
+                ]),
+                Filament\Forms\Components\MarkdownEditor::make('description_en')
+                ->columnSpanFull()
+                ->label("Description (EN)")
+                ->disableToolbarButtons([
+                    'attachFiles',
+                ]),
                 Filament\Forms\Components\FileUpload::make('bgimage')
                 ->label('Background')
                 ->disk('carousel')
                 ->image()
                 ->imageEditor()
                 ->columnSpanFull(),
+                Section::make('Footer Carousel Section')->schema([
+                    Repeater::make('sections')
+                    ->label("")
+                    ->schema([
+                        TextInput::make('label')->required(),
+                        TextInput::make('label_en')->required(),
+                        TextInput::make('link_section')->required(),
+                    ])->columns(3)
+                    ->itemLabel(fn (array $state): ?string => $state['label'] ?? null)
+                ]),
                 Fieldset::make('Site Owner')
                 ->schema([
                     Filament\Forms\Components\Select::make('site')
@@ -73,7 +102,9 @@ class CarouselResource extends Resource
                 Filament\Tables\Columns\ViewColumn::make('description')->view('tables.columns.carousel')->sortable(),
             ])
             ->filters([
-                Filament\Tables\Filters\SelectFilter::make('Site Owner')->relationship('site', 'name')->columnSpan(1),
+                Filament\Tables\Filters\SelectFilter::make('Site Owner')
+                ->relationship('site', 'name', fn (Builder $query) => $query->orderBy('id'))
+                ->columnSpanFull(),
             ],layout: FiltersLayout::AboveContent)
             ->actions([
                 Filament\Tables\Actions\ReplicateAction::make(),
@@ -88,7 +119,9 @@ class CarouselResource extends Resource
                 Filament\Tables\Actions\DeleteBulkAction::make(),
                 Filament\Tables\Actions\ForceDeleteBulkAction::make(),
                 Filament\Tables\Actions\RestoreBulkAction::make(),
-            ]);
+            ])/* ->groups([
+                'site.name'
+            ])->defaultGroup('site.name') */;
     }
 
     protected function getTableFiltersFormWidth(): string{

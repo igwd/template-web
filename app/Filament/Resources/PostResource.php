@@ -74,6 +74,7 @@ class PostResource extends Resource
                                         }
                                     }
                                 })
+                                ->prefix('site/')
                                 ->required(),
                             RichEditor::make('content')
                                 ->label('Berita')

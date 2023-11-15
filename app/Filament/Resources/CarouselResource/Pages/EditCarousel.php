@@ -25,4 +25,10 @@ class EditCarousel extends EditRecord
         $record->update($data);
         return $record;
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data['sections'] = json_decode($data['sections'],true);
+        return $data;
+    }
 }
