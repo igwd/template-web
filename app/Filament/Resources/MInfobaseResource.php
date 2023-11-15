@@ -117,7 +117,10 @@ class MInfobaseResource extends Resource
                 ->searchable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('site')->label("")->relationship('site', 'name')->columnSpanFull(),
+                Tables\Filters\SelectFilter::make('site')
+                ->label("")
+                ->relationship('site', 'name', fn (Builder $query) => $query->orderBy('id'))
+                ->columnSpanFull(),
             ],layout: FiltersLayout::AboveContent)
             ->actions([
                 ReplicateAction::make(),

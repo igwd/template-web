@@ -20,17 +20,12 @@ Route::view('/', 'welcome')->name('home');
 Route::get('/teknik-komputer', TeknikKomputerBase::class)->name("teknik-komputer");
 
 /* Route::get('/', App\Http\Livewire\Component\Front\Homepage::class)->name('home'); */
+Route::get('/', App\Http\Livewire\Component\Front\SiteComponent::class)->name('home');
 
-Route::get('/', function(){
-    return view('livewire.component.front.homepage');
-});
-
-Route::get('site/{slug}', function($slug){
-    return view('livewire.component.front.site',['slug'=>$slug]);
-});
+Route::get('site/{slug}', App\Http\Livewire\Component\Front\SiteComponent::class)->name('site');
 
 Route::get('switch/{lang}',[App\Http\Controllers\LanguageController::class, 'switchLang'])->name('switch.lang');
 
 Route::get('/home', function(){
     return view('livewire.component.front.news');
-})->name('home');
+})->name('news');

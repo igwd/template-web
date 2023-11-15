@@ -21,12 +21,11 @@ class MCarousel extends Model
         'heading_lg',
         'heading_md',
         'description',
-        'section',
+        'sections',
         'heading_sm_en',
         'heading_lg_en',
         'heading_md_en',
         'description_en',
-        'section_en',
         'bgimage',
         'site_id',
         'created_by',
@@ -48,7 +47,7 @@ class MCarousel extends Model
             'heading_lg_en as heading_lg',
             'heading_md_en as heading_md',
             'description_en as description',
-            'section_en as section',
+            'sections',
             'bgimage'
         );
 
@@ -61,7 +60,7 @@ class MCarousel extends Model
             'heading_lg',
             'heading_md',
             'description',
-            'section',
+            'sections',
             'bgimage'
         );
 
