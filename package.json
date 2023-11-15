@@ -22,7 +22,8 @@
     "dependencies": {
         "@alpinejs/persist": "^3.13.2",
         "@prettier/plugin-php": "^0.21.0",
-        "aos": "^3.0.0-beta.6",
+        "aos": "^2.3.4",
+        "apexcharts": "^3.44.0",
         "tw-elements": "^1.0.0"
     }
 }

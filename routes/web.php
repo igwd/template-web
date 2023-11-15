@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Livewire\Component\Front\Page\TeknikKomputer\TeknikKomputerBase;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', App\Http\Livewire\Component\Front\SiteComponent::class)->name('home');
+Route::get('/teknik-komputer', TeknikKomputerBase::class)->name("teknik-komputer");
+
+Route::get('/', App\Http\Livewire\Component\Front\Homepage::class)->name('home');
 
 Route::get('site/{slug}', App\Http\Livewire\Component\Front\SiteComponent::class)->name('site');
 
