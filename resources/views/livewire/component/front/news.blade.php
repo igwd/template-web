@@ -1,3 +1,5 @@
+@extends('layouts.base')
+@section('body')
 <div>
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto max-w-7x1">
@@ -59,3 +61,4 @@
         </div>
     </section>
 </div>
+@endsection

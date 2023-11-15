@@ -6,7 +6,6 @@
             padding: 20px 20px 0 20px;
         }
     </style>
-
     <section class="container-news flex flex-col bg-white dark:bg-gray-900">
         <div
             class="text-sm font-medium text-center text-gray-500 border-b border-gray-400 dark:text-gray-400 dark:border-gray-700">

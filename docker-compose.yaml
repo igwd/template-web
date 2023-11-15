@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+  php:
+    image: php:8.2.7-fpm
+    build: 
+      context: ./
+      dockerfile: ./docker-config/Dockerfile
+    working_dir: /var/www
+    tty: true
+    volumes:
+      - ./:/var/www
+      - ./docker-config/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - ci_network
+
+  webserver:
+    image: nginx:alpine
+    ports: 
+      - "9292:92"
+    tty: true
+    volumes:
+      - ./:/var/www
+      - ./docker-config/devserver.conf:/etc/nginx/conf.d/devserver.conf
+    depends_on:
+      - php
+    networks:
+      - ci_network
+    restart: on-failure
+  
+  database:
+    image: mariadb:10.4.7
+    container_name: template-web-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3311:3306"
+    environment:
+      MYSQL_DATABASE: template-web
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./mysqlmine.cnf:/etc/mysql/mysqlmine.cnf
+    networks:
+      - ci_network
+
+#Docker networks
+networks:
+  ci_network:
+    driver: bridge
+
+# Docker volumes
+volumes:
+  dbdata:
+    driver: local
