@@ -21,28 +21,19 @@
 
                 <figure class="card-zoom-news">
                     <img class="card-zoom-image w-full rounded-lg over:scale-110 transition duration-500 object-cover"
-                        src="https://www.teknik.warmadewa.ac.id/public/uploads/berita/Berita_232708070811_.jpg"
+                        src="{{Storage::disk('news')->url($news->thumbnail)}}"
                         alt="">
                 </figure>
                 <span class=" text-xs text-gray-500 truncate dark:text-gray-400 mt-3">
-                    1 Juni 2023
+                    {{\Illuminate\Support\Carbon::parse($news->published_at)->diffForHumans()}}
                 </span>
-                <h2 class="text-lg text-gray-900 dark:text-white font-bold">Pelatihan BIM oleh Balai Jasa Konstruksi
-                    Wilayah IV Surabaya
+                <h2 class="text-lg text-gray-900 dark:text-white font-bold">
+                    {{$news->title}}
                 </h2>
                 <div class="flex-1 mt-5 h-40 overflow-hidden">
                     <p class="text-gray-600 dark:text-gray-300"
                         style="max-height: 100px; overflow: hidden; text-overflow: ellipsis; ">
-                        Telah berlangsung
-                        pelatihan BIM yg
-                        difasilitasi oleh
-                        Balai Jasa Konstruksi Wilayah
-                        IV
-                        Surabaya selama 6
-                        hari penuh.Diikuti oleh 21 orang mhs prodi sipil (senin depan akan diluncurkan). Jika lulus
-                        ujian mereka
-                        akan memperoleh sertifikat yg berguna untuk melengkapi Mencari pekerjaan
-                        (yg penting mereka memperoleh keterampilan tambahan) untuk mereka bekerja.
+                        {{Formatting::limitWords($news->content, 50, '...')}}
                     </p>
                     <button
                         class=" mt-3 h-8 text-sm bg-transparent hover:bg-blue-500 text-gray-500 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded">

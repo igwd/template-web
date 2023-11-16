@@ -27,6 +27,8 @@ class MCarousel extends Model
         'heading_md_en',
         'description_en',
         'bgimage',
+        'bgvideo',
+        'sort',
         'site_id',
         'created_by',
         'updated_by'
@@ -48,7 +50,8 @@ class MCarousel extends Model
             'heading_md_en as heading_md',
             'description_en as description',
             'sections',
-            'bgimage'
+            'bgimage',
+            'bgvideo'
         );
 
     }
@@ -61,9 +64,44 @@ class MCarousel extends Model
             'heading_md',
             'description',
             'sections',
-            'bgimage'
+            'bgimage',
+            'bgvideo'
         );
 
+    }
+
+    public function moveUp($siteId)
+    {
+        $currentSortOrder = $this->sort;
+
+        // Get the row above
+        $rowAbove = self::where('site_id',$siteId)
+            ->where('sort', '<', $currentSortOrder)
+            ->orderByDesc('sort')
+            ->first();
+
+        if ($rowAbove) {
+            // Swap the sort orders
+            $this->update(['sort' => $rowAbove->sort]);
+            $rowAbove->update(['sort' => $currentSortOrder]);
+        }
+    }
+
+    public function moveDown($siteId)
+    {
+        $currentSortOrder = $this->sort;
+
+        // Get the row below
+        $rowBelow = self::where('site_id',$siteId)
+            ->where('sort', '>', $currentSortOrder)
+            ->orderBy('sort')
+            ->first();
+
+        if ($rowBelow) {
+            // Swap the sort orders
+            $this->update(['sort' => $rowBelow->sort]);
+            $rowBelow->update(['sort' => $currentSortOrder]);
+        }
     }
 
 }

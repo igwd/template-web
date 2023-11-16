@@ -21,7 +21,7 @@
     @livewireStyles
 </head>
 
-<body x-data="{theme: $persist('dark')}" x-bind:class='theme' class="flex flex-col min-h-screen bg-gray-100">
+<body x-data="{theme: $persist('dark'), scrollTo: ''}" x-bind:class='theme' class="flex flex-col min-h-screen bg-gray-100">
     <div>
         @yield('body')
     </div>
@@ -29,9 +29,20 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
-        window.addEventListener("popstate", function (event) { window.location.reload(); });
-        
+        function scrollToDiv(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest' // or 'end' or 'center' or 'nearest'
+                });
+            }
+        }
+        window.addEventListener("popstate", function (event) { 
+            window.location.reload(); 
+        });
     </script>
+    @stack('custom-scripts')
 </body>
 
 </html>
