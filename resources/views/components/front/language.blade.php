@@ -34,7 +34,7 @@
             @endif
         </button>
         <div x-show="open" @click.away="open = false"
-            class="flex z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
+            class=" absolute flex z-50 my-1 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
             <ul class="py-2 font-medium" role="none">
                 <li>
                     <a href="{{ route('switch.lang', 'id') }}"

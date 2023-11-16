@@ -18,16 +18,18 @@
                             <p class="hidden md:block mt-20 text-lg font-poppins">{{ $carousel['description'] }}</p>
                             <ul
                                 class=" flex-wrap md:mt-20 space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 text-lg hidden md:flex items-center h-10 gap-5 ">
-                                @foreach (($carousel['sections'] ? json_decode($carousel['sections'],true) : []) as $item)
-                                <li class="text-gray-200 hover:text-blue-500 transition cursor-pointer text-base md:text-xl list-none"
-                                    data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom">
-                                    <svg class="text-blue-500 inline w-3 h-3 dark:text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 16">
-                                        <path
-                                        d="M3.414 1A2 2 0 0 0 0 2.414v11.172A2 2 0 0 0 3.414 15L9 9.414a2 2 0 0 0 0-2.828L3.414 1Z" />
-                                    </svg>
-                                    <a href="javascript:void(0)" data-target="{{$item['link_section']}}">{{(Formatting::getLang() == 'id' ? $item['label'] : $item['label_en'])}}</a>
-                                </li>
+                                @foreach ($carousel['sections'] ? json_decode($carousel['sections'], true) : [] as $item)
+                                    <li class="text-gray-200 hover:text-blue-500 transition cursor-pointer text-base md:text-xl list-none"
+                                        data-aos="fade-up" data-aos-duration="1000"
+                                        data-aos-anchor-placement="top-bottom">
+                                        <svg class="text-blue-500 inline w-3 h-3 dark:text-white" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 16">
+                                            <path
+                                                d="M3.414 1A2 2 0 0 0 0 2.414v11.172A2 2 0 0 0 3.414 15L9 9.414a2 2 0 0 0 0-2.828L3.414 1Z" />
+                                        </svg>
+                                        <a href="javascript:void(0)"
+                                            data-target="{{ $item['link_section'] }}">{{ Formatting::getLang() == 'id' ? $item['label'] : $item['label_en'] }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -87,6 +89,6 @@
             }, 5000);
         }
 
-        //window.addEventListener('load', autoAdvanceCarousel);
+        // window.addEventListener('load', autoAdvanceCarousel);
     </script>
 </div>
