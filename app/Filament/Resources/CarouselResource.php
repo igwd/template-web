@@ -3,25 +3,25 @@
 namespace App\Filament\Resources;
 
 use Filament;
-use App\Models\Site;
 
+use Filament\Forms\Get;
 use Filament\Forms\Form;
 use App\Models\MCarousel;
+
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Repeater;
 use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CarouselResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CarouselResource\RelationManagers;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
 
 class CarouselResource extends Resource
 {
@@ -67,12 +67,22 @@ class CarouselResource extends Resource
                 ->disableToolbarButtons([
                     'attachFiles',
                 ]),
-                Filament\Forms\Components\FileUpload::make('bgimage')
-                ->label('Background')
-                ->disk('carousel')
-                ->image()
-                ->imageEditor()
-                ->columnSpanFull(),
+                Filament\Forms\Components\Section::make('Background')
+                ->schema([
+                    Filament\Forms\Components\Toggle::make('use_video')->reactive(),
+                    Filament\Forms\Components\FileUpload::make('bgimage')
+                    ->label('Image')
+                    ->disk('carousel')
+                    ->image()
+                    ->imageEditor()
+                    ->columnSpanFull()
+                    ->visible(fn (Get $get): bool => !$get('use_video')),
+                    Filament\Forms\Components\FileUpload::make('bgvideo')
+                    ->label('Video')
+                    ->disk('carousel')
+                    ->columnSpanFull()
+                    ->visible(fn (Get $get): bool => $get('use_video'))
+                ]),
                 Section::make('Footer Carousel Section')->schema([
                     Repeater::make('sections')
                     ->label("")
@@ -107,6 +117,18 @@ class CarouselResource extends Resource
                 ->columnSpanFull(),
             ],layout: FiltersLayout::AboveContent)
             ->actions([
+                Filament\Tables\Actions\Action::make('up')
+                ->icon('heroicon-o-bars-arrow-up')
+                ->action(function (MCarousel $record) {
+                    $record->moveUp($record->site_id);
+                    $record->save();
+                }),
+                Filament\Tables\Actions\Action::make('down')
+                ->icon('heroicon-o-bars-arrow-down')
+                ->action(function (MCarousel $record) {
+                    $record->moveDown($record->site_id);
+                    $record->save();
+                }),
                 Filament\Tables\Actions\ReplicateAction::make(),
                 Filament\Tables\Actions\EditAction::make(),
                 Filament\Tables\Actions\DeleteAction::make()
@@ -119,9 +141,11 @@ class CarouselResource extends Resource
                 Filament\Tables\Actions\DeleteBulkAction::make(),
                 Filament\Tables\Actions\ForceDeleteBulkAction::make(),
                 Filament\Tables\Actions\RestoreBulkAction::make(),
-            ])/* ->groups([
-                'site.name'
-            ])->defaultGroup('site.name') */;
+            ])->groups([
+                Filament\Tables\Grouping\Group::make('site.name')
+                ->orderQueryUsing(fn (Builder $query) => $query->orderBy('site_id', 'asc')->orderBy('sort'))
+                ->collapsible(),
+            ])->defaultGroup('site.name');
     }
 
     protected function getTableFiltersFormWidth(): string{

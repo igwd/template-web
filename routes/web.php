@@ -31,6 +31,6 @@ Route::get('switch/{lang}', function($lang){
     return redirect()->back()->withCookie($forgetCookie)->withCookie($newCookie);
 })->name('switch.lang');
 
-Route::get('/home', function(){
+Route::get('/home', function () {
     return view('livewire.component.front.news');
 })->name('news');

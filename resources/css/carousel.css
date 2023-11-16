@@ -24,7 +24,7 @@
 }
 
 .carousel-item div {
-    height: calc(100vh - 72px);
+    height: calc(100vh - 120px);
 }
 
 .carousel-control {
@@ -111,4 +111,9 @@
 #carousel-9:checked~.control-9~.carousel-indicators li:nth-child(9) .carousel-bullet,
 #carousel-10:checked~.control-10~.carousel-indicators li:nth-child(10) .carousel-bullet {
     color: #428bca;
+}
+
+.custom-shadow {
+    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
+
 }

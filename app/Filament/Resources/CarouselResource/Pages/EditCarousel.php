@@ -31,4 +31,9 @@ class EditCarousel extends EditRecord
         $data['sections'] = json_decode($data['sections'],true);
         return $data;
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
