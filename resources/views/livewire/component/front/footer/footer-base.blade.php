@@ -126,9 +126,7 @@
             <div class="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex justify-center">
                 <span class=" text-center text-sm text-gray-500 dark:text-gray-300 ">©
                     2023
-                    <a href="https://flowbite.com/">Teknik Komputer Warmadewa Team</a>.
-                    <<<<<<< HEAD=======<a href="https://flowbite.com/">Teknik Komputer Warmadewa</a>.
-                        >>>>>>> origin/panel-admin
+                    <a href="/teknik-komputer">Teknik Komputer Warmadewa Team</a>.
                 </span>
 
             </div>
