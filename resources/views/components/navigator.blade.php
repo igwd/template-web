@@ -1,4 +1,4 @@
-<div class=" fixed bottom-5 right-5 z-50 h-14 w-14 bg-blue-600 text-white grid justify-center items-center rounded-full">
+<div class="fixed bottom-5 right-5 z-50 h-14 w-14 bg-blue-600 text-white grid justify-center items-center rounded-full">
     <button id="dropdownDelayButton" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500"
         data-dropdown-trigger="hover" type="button">
         <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@
     <div id="dropdownDelay" class="z-50 hidden divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
         <ul class=" bg-transparent text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
             <li class="mb-3">
-                <a href="#" class=" block">
+                <a href="#" class="block" id="scrollToTop">
                     <svg class="h-10 w-10" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink"
                         xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#2BA9BB">
@@ -94,4 +94,14 @@
             </li>
         </ul>
     </div>
+
+    <script>
+        document.getElementById('scrollToTop').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            document.getElementById('carousel').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </div>

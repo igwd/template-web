@@ -1,7 +1,52 @@
 <div>
-    <div class="carousel relative shadow-2xl bg-white ">
+    <section id="carousel" class="carousel relative shadow-2xl bg-white ">
         <div class="carousel-inner relative overflow-hidden w-full ">
             <!--Slide-->
+            <input class="hidden carousel-open" type="radio" id="carousel-4" name="carousel" aria-hidden="true"
+                hidden="" checked="checked">
+            <div class="carousel-item absolute opacity-0 overflow-hidden">
+                <div class=" relative bg-bg-dark text-white ">
+                    <video class="absolute w-full h-full scale-125" autoplay loop>
+                        <source src="{{ asset('video/profile-warmadewa.mp4') }}" type="video/mp4">
+                    </video>
+                    <div class="p-20 z-30 flex-col justify-center items-center flex" data-aos="fade-up"
+                        data-aos-duration="3000">
+                        <p class="custom-shadow font-bold mt-6 md:mt-0 text-2xl md:text-5xl font-poppins">
+                            Selamat datang di</p>
+
+                        <p class="custom-shadow text-4xl md:text-6xl md:mb-4 md:mt-4 text-yellow-300 font-lobster">
+                            Fakultas Teknik dan Perencanaan
+                        </p>
+                        <p class="custom-shadow text-xl md:text-4xl mt-6 md:mt-0">
+                            Universitas Warmadewa
+                        </p>
+                        <a href="#search" id="scrollToSearch">
+                            <svg class="absolute text-white hover:text-gray-900 duration-300 bottom-0 w-10 h-10 animate-bounce"
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M5 15C5 16.8565 5.73754 18.6371 7.05029 19.9498C8.36305 21.2626 10.1435 21.9999 12 21.9999C13.8565 21.9999 15.637 21.2626 16.9498 19.9498C18.2625 18.6371 19 16.8565 19 15V9C19 7.14348 18.2625 5.36305 16.9498 4.05029C15.637 2.73754 13.8565 2 12 2C10.1435 2 8.36305 2.73754 7.05029 4.05029C5.73754 5.36305 5 7.14348 5 9V15Z"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                    </path>
+                                    <path d="M12 6V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                    <path d="M15 11L12 14L9 11" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <label for="carousel-3"
+                class="prev opacity-50 control-4 w-10 h-10 ml-2 md:ml-10 absolute hidden cursor-pointer text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+            <label for="carousel-1"
+                class="next opacity-50 control-4 w-10 h-10 mr-2 md:mr-10 absolute hidden cursor-pointer text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+
             @foreach ($carousels as $item => $carousel)
                 @php $index = ($item + 1) @endphp
                 <input class="hidden carousel-open" type="radio" id="carousel-{{ $index }}" name="carousel"
@@ -54,6 +99,7 @@
                 <label for="carousel-{{ $next }}"
                     class="next opacity-50 control-{{ $index }} w-10 h-10 mr-2 md:mr-10 absolute hidden cursor-pointer text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-blue-700 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
             @endforeach
+
             <!-- Add additional indicators for each slide-->
             <ol class="carousel-indicators">
                 @foreach ($carousels as $item => $carousel)
@@ -63,10 +109,22 @@
                             class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
                     </li>
                 @endforeach
+                <li class="inline-block mr-3">
+                    <label for="carousel-4"
+                        class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+                </li>
             </ol>
         </div>
-    </div>
+    </section>
     <script>
+        document.getElementById('scrollToSearch').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            document.getElementById('search').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
         function autoAdvanceCarousel() {
             const radios = document.querySelectorAll('.carousel-open');
             let currentRadio = document.querySelector('.carousel-open:checked');
