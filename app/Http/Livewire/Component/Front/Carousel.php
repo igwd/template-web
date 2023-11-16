@@ -24,7 +24,7 @@ class Carousel extends Component
             }else{
                 $query->where('is_main_site', 1);
             }
-        })->orderBy('id', 'asc')->get()->toArray();
+        })->orderBy('id', 'desc')->get()->toArray();
         if($this->lang === 'en'){
             $this->carousels = MCarousel::en()->whereHas('site', function ($query) use ($slug) {
                 if(!empty($slug)){
@@ -32,7 +32,7 @@ class Carousel extends Component
                 }else{
                     $query->where('is_main_site', 1);
                 }
-            })->orderBy('id', 'asc')->get()->toArray();
+            })->orderBy('id', 'desc')->get()->toArray();
         }
     }
 
