@@ -127,6 +127,8 @@
                 <span class=" text-center text-sm text-gray-500 dark:text-gray-300 ">©
                     2023
                     <a href="https://flowbite.com/">Teknik Komputer Warmadewa Team</a>.
+                    <<<<<<< HEAD=======<a href="https://flowbite.com/">Teknik Komputer Warmadewa</a>.
+                        >>>>>>> origin/panel-admin
                 </span>
 
             </div>
@@ -146,5 +148,21 @@
             window.open("https://maps.app.goo.gl/vdP2ZsyhUrzKjWDs6");
         });
         L.marker(target).addTo(map);
+        // document.addEventListener('livewire:init', function () {
+        //     // Your JS here.
+        //     const element = document.getElementById('osm-map');
+        //     element.style = 'height:228px;';
+        //     const map = L.map(element);
+        //     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        //         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        //     }).addTo(map);
+
+        //     const target = L.latLng('-8.658153123131761', '115.24220484292061');
+        //     map.setView(target, 19);
+        //     map.on('click', () => {
+        //         window.open("https://maps.app.goo.gl/vdP2ZsyhUrzKjWDs6");
+        //     });
+        //     L.marker(target).addTo(map);
+        // });
     </script>
 </div>
