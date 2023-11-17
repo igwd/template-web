@@ -127,7 +127,7 @@
                         currentRadio = nextRadio;
                     }, 5000);
                 }
-                window.addEventListener('load', autoAdvanceCarousel);
+                /* window.addEventListener('load', autoAdvanceCarousel); */
             });
         </script>
     @endpush
