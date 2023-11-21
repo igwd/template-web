@@ -10,9 +10,10 @@
                 max-height: 550px;
             }
         </style>
-        <div class="flex flex-col min-h-screen bg-white  dark:bg-gray-700">
+        <div class="flex flex-col min-h-screen bg-white dark:bg-gray-700">
             @livewire('component.front.navbar')
-            <div class="container-sub text-gray-500 p-5 pb-5 text-center grid grid-cols-3 gap-4">
+            <div
+                class="container-sub text-gray-500 p-5 pb-5 text-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-0 md:gap-4">
                 <div class="col-span-2">
                     <div class="h-full p-5 flex flex-col rounded-lg shadow bg-white dark:bg-gray-800">
 
@@ -77,7 +78,7 @@
                     </div>
 
                 </div>
-                <div class="container-news">
+                <div class="container-news mt-4 md:mt-0">
                     @livewire('component.front.news.news-update')
                 </div>
             </div>

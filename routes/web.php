@@ -17,6 +17,8 @@ use App\Http\Livewire\Component\Front\Page\TeknikKomputer\TeknikKomputerBase;
 
 Route::get('/teknik-komputer', TeknikKomputerBase::class)->name("teknik-komputer");
 
+Route::get('/teknik-komputer/dosen', App\Http\Livewire\Component\Front\Dosen::class)->name("teknik-komputer-dosento");
+
 Route::get('/', App\Http\Livewire\Component\Front\Homepage::class)->name('home');
 
 Route::get('site/{slug}', App\Http\Livewire\Component\Front\SiteComponent::class)->name('site');

@@ -102,7 +102,7 @@
                 </button>
             </h2>
             <div id="accordion-open-body-2" class="hidden" aria-labelledby="accordion-open-heading-2">
-                <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                     <p class="mb-2 text-gray-500 dark:text-gray-400">
                         Lulusan prodi Teknik Komputer UMN bisa melanjutkan pendidikan ke jenjang S2 atau Master di
                         perguruan tinggi dalam negeri maupun luar negeri. Lulusan bisa mengambil master degree di bidang
@@ -125,7 +125,7 @@
                 </button>
             </h2>
             <div id="accordion-open-body-3" class="hidden" aria-labelledby="accordion-open-heading-3">
-                <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                     <p class="mb-2 text-gray-500 dark:text-gray-400">Lulusan Program Studi Teknik Komputer memiliki
                         pengetahuan menyeluruh di bidang komputer (IT) sehingga mampu membangun solusi teknologi lengkap
                         yang melibatkan software, network, security, dan hardware untuk menyelesaikan masalah-masalah
@@ -147,7 +147,7 @@
                 </button>
             </h2>
             <div id="accordion-open-body-4" class="hidden" aria-labelledby="accordion-open-heading-4">
-                <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                     <p class="mb-2 text-gray-500 dark:text-gray-400">
                         Lulusan diharapkan menjadi tenaga ahli di bidang teknik komputer yang menguasai pengetahuan
                         secara menyeluruh meliputi software,big data, programing, cloud, network, and security serta
@@ -171,7 +171,7 @@
                 </button>
             </h2>
             <div id="accordion-open-body-5" class="hidden" aria-labelledby="accordion-open-heading-5">
-                <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                     <p class="mb-2 text-gray-500 dark:text-gray-400">
                         Teknik Komputer Unwar telah bekerja sama dengan Perusahaan Industri seperti GWS Komp dan
                         Cisco dalam mendukung kegiatan akademik perkuliahan dan program sertifikasi. Teknik

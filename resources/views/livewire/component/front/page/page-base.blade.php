@@ -3,24 +3,25 @@
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
             data-tabs-toggle="#default-tab-content" role="tablist">
             <li class="mr-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile"
-                    type="button" role="tab" aria-controls="profile" aria-selected="false">Profil</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg text-lg" id="profile-tab"
+                    data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
+                    aria-selected="false">Profil</button>
             </li>
             <li class="mr-2" role="presentation">
                 <button
-                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                    class="text-lg inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                     id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
                     aria-controls="dashboard" aria-selected="false">Dosen</button>
             </li>
             <li class="mr-2" role="presentation">
                 <button
-                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                    class="text-lg inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                     id="settings-tab" data-tabs-target="#settings" type="button" role="tab"
                     aria-controls="settings" aria-selected="false">Kurikulum</button>
             </li>
             <li role="presentation">
                 <button
-                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                    class="text-lg inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                     id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab"
                     aria-controls="contacts" aria-selected="false">Visi & Misi</button>
             </li>
