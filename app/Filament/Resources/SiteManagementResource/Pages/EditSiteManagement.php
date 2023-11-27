@@ -27,6 +27,7 @@ class EditSiteManagement extends EditRecord
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
+        $data['is_main_site'] = ($data['is_main_site'] == 1 ? true : false);
         $data['sections'] = json_decode($data['sections'],true);
         return $data;
     }

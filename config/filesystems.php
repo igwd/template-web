@@ -68,6 +68,22 @@ return [
             'throw' => false,
         ],
 
+        'gallery_photo' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/gallery/photo'),
+            'url' => env('APP_URL').'storage/gallery/photo',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'gallery_video' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/gallery/video'),
+            'url' => env('APP_URL').'storage/gallery/video',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'infobase' => [
             'driver' => 'local',
             'root' => storage_path('app/public/infobase'),

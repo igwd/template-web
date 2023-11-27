@@ -45,6 +45,10 @@ class Post extends Model
         return $this->belongsTo('App\Models\User', 'updated_by', 'id');
     }
 
+    public function site(){
+        return $this->belongsTo('App\Models\Site','site_id','id');
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
@@ -54,5 +58,27 @@ class Post extends Model
         ->when($filters['status'] ?? null, function ($query, $status) {
             $query->where('status', '=', $status);
         });
+    }
+
+    public function scopeEn($query){
+        return $query->select(
+            'slug_en as slug',
+            'thumbnail',
+            'thumbnail_meta_en as thumbnail_meta',
+            'title_en as title',
+            'content_en as content',
+            'tags_en as tags',
+            'published_at');
+    }
+
+    public function scopeId($query){
+        return $query->select(
+            'slug',
+            'thumbnail',
+            'thumbnail_meta',
+            'title',
+            'content',
+            'tags',
+            'published_at');
     }
 }

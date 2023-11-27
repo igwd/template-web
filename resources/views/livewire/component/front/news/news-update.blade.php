@@ -1,29 +1,35 @@
 <div
     class="h-full flex flex-col p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Berita Terkini</h5>
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            {{(Formatting::getLang()=="en" ? "News Update" : "Berita Terkini")}} <div class="bg-green-300" wire:offline.class.remove="bg-green-300">          
+        </h5>
         <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-            View all
+            {{(Formatting::getLang()=="en" ? "View All" : "Lihat Semua")}}
         </a>
     </div>
     <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-            @foreach ($newsUpdate as $list)
-                <li class="py-3 sm:py-4">
-                    <div class="flex items-center space-x-4">
-                        <div class="flex-1 min-w-0">
-                            <p class="text-sm hover:text-purple-600 font-medium text-gray-900 dark:text-white">
-                                <a href="http://" target="_blank" rel="noopener noreferrer">{{ $list->title }}</a>
-                            </p>
-                            <span class=" text-xs text-gray-500 truncate dark:text-gray-400">
-                                {{ \Illuminate\Support\Carbon::parse($list->published_at)->diffForHumans() }}
-                            </span>
-                        </div>
-                    </div>
-                </li>
-            @endforeach
+            @if(!empty($newsUpdate))
+                @foreach ($newsUpdate as $list)
+                    <a href="{{url('news/'.$list->slug)}}" wire:navigate>
+                        <li class="py-3 sm:py-4">
+                            <div class="flex text-left space-x-4">
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm hover:text-purple-600 font-medium text-gray-900 dark:text-white">
+                                        <span rel="noopener noreferrer">{{ $list->title }}</span>
+                                    </p>
+                                    <span class=" text-xs text-gray-500 truncate dark:text-gray-400">
+                                        {{ \Illuminate\Support\Carbon::parse($list->published_at)->diffForHumans() }}
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </a>
+                @endforeach
+            @endif
         </ul>
-        <div class="text-center" wire:loading.delay>
+        <div class="flex items-center justify-center" wire:loading.delay>
             <div role="status">
                 <svg aria-hidden="true"
                     class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

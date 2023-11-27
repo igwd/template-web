@@ -80,6 +80,7 @@ class CarouselResource extends Resource
                     Filament\Forms\Components\FileUpload::make('bgvideo')
                     ->label('Video')
                     ->disk('carousel')
+                    ->downloadable()
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => $get('use_video'))
                 ]),

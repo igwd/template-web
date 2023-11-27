@@ -47,7 +47,7 @@ class SiteManagementResource extends Resource
                 ->description('General configuration for Site Management')
                 ->schema([
                     TextInput::make('name')->label('Site Name')
-                    ->live()
+                    ->live(onBlur: true)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
                     ->required(),
                     TextInput::make('slug')->label('Slug URL')

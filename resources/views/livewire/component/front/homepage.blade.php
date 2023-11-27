@@ -3,5 +3,4 @@
     @foreach ($site['sections'] as $section)
         @livewire($section['section'], ['slug' => $site['slug']])
     @endforeach
-    <x-navigator />
 @endsection
