@@ -7,6 +7,8 @@ use Filament;
 
 use App\Models\Post;
 use Filament\Tables;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -27,6 +29,8 @@ use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\PostResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostResource\RelationManagers;
+use App\Helpers\Formatting;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PostResource extends Resource
 {
@@ -55,38 +59,24 @@ class PostResource extends Resource
                         Fieldset::make('Content')
                         ->schema([
                             TextInput::make('title')
-                                ->label('Judul')
-                                ->afterStateUpdated(function (Closure $get, Closure $set, ?string $state) {
-                                    if (! $get('is_slug_changed_manually') && filled($state)) {
-                                        $set('slug', Str::slug($state));
-                                    }
-                                })
-                                ->reactive()
-                                ->columnSpanFull()
-                                ->required(),
+                            ->label('Judul')
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                            ->columnSpanFull()
+                            ->required(),
                             TextInput::make('slug')
-                                ->afterStateUpdated(function (Closure $get, Closure $set) {
-                                    if (!$get('is_slug_changed_manually')) {
-                                        // Generate slug from title if it hasn't been changed manually
-                                        $title = $get('title');
-                                        if (filled($title)) {
-                                            $set('slug', Str::slug($title));
-                                        }
-                                    }
-                                })
-                                ->prefix('site/')
-                                ->required(),
+                            ->columnSpanFull()
+                            ->required(),
                             RichEditor::make('content')
-                                ->label('Berita')
-                                ->columnSpanFull()
-                                ->required(),
+                            ->label('Berita')
+                            ->columnSpanFull()
+                            ->required(),
                             TagsInput::make('tags')
-                                ->label(fn()=> new HtmlString('Tags'))
-                                ->placeholder('')
-                                ->helperText('<small class="text-red-700">*) pisahkan dengan tanda (koma)</small>')
-                                ->separator(','),
+                            ->placeholder('')
+                            ->helperText(new HtmlString('<small class="text-red-700">*) pisahkan dengan tanda (koma)</small>'))
+                            ->separator(','),
                             DateTimePicker::make('published_at')
-                                ->required()
+                            ->required()
                         ])->columnSpanFull()
                     ]),
                     Tabs\Tab::make('English (EN)')
@@ -94,37 +84,30 @@ class PostResource extends Resource
                         Fieldset::make('Content')
                         ->schema([
                             TextInput::make('title_en')
-                                ->label('Title')
-                                ->afterStateUpdated(function (Closure $get, Closure $set, ?string $state) {
-                                    if (! $get('is_slug_changed_manually') && filled($state)) {
-                                        $set('slug_en', Str::slug($state));
-                                    }
-                                })
-                                ->reactive()
-                                ->columnSpanFull()
-                                ->required(),
+                            ->label('Title')
+                            ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug_en', Str::slug($state)))
+                            ->live(onBlur: true)
+                            ->columnSpanFull()
+                            ->required(),
                             TextInput::make('slug_en')
-                                ->label('Slug (en)')
-                                ->afterStateUpdated(function (Closure $get, Closure $set) {
-                                    if (!$get('is_slug_changed_manually')) {
-                                        // Generate slug from title if it hasn't been changed manually
-                                        $title = $get('title_en');
-                                        if (filled($title)) {
-                                            $set('slug_en', Str::slug($title));
-                                        }
-                                    }
-                                })
-                                ->required(),
+                            ->label('Slug (en)')
+                            ->afterStateUpdated(function (Closure $get, Closure $set) {
+                                $title = $get('title_en');
+                                if (filled($title)) {
+                                    $set('slug_en', Str::slug($title));
+                                }
+                            })
+                            ->required(),
                             RichEditor::make('content_en')
-                                ->label('News')
-                                ->columnSpanFull()
-                                ->required(),
+                            ->label('News')
+                            ->columnSpanFull()
+                            ->required(),
                             TagsInput::make('tags_en')
-                                ->label('Tags')
-                                ->placeholder('')
-                                ->helperText('<small class="text-red-700">*) separate with a comma</small>')
-                                ->separator(',')
-                                ->columnSpanFull(),
+                            ->label('Tags')
+                            ->placeholder('')
+                            ->helperText(new HtmlString('<small class="text-red-700">*) pisahkan dengan tanda (koma)</small>'))
+                            ->separator(',')
+                            ->columnSpanFull(),
                         ])->columnSpanFull()
                     ]),
                 ])->columnSpanFull(),
@@ -133,6 +116,9 @@ class PostResource extends Resource
                         FileUpload::make('thumbnail')
                             ->label('Photo')
                             ->disk('news')
+                            ->getUploadedFileNameForStorageUsing(
+                                fn (TemporaryUploadedFile $file, Get $get): string => (string) $get('slug').".".$file->getClientOriginalExtension()        
+                            )
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -144,20 +130,23 @@ class PostResource extends Resource
             ->columns([
                 ImageColumn::make('thumbnail')->disk('news'),
                 TextColumn::make('title')
-                    ->description(fn (Post $record): string => Str::words($record->content,8,"..."))
-                    ->wrap()
-                    ->searchable()
-                    ->sortable(),
-                ViewColumn::make('tags')->view('tables.columns.tags')->sortable(),
+                ->description(fn (Post $record): string => Formatting::limitWords($record->content,8,"..."))
+                ->wrap()
+                ->searchable()
+                ->sortable(),
+                TextColumn::make('tags')
+                ->badge()
+                ->separator(',')
+                ->sortable(),
                 TextColumn::make('user_created.name')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Created By')
-                    ->description(
-                        fn (Post $record): string => Carbon::parse($record->created_at)->diffForHumans()
-                    )
-                    ->searchable()
-                    ->sortable(),
+                ->searchable()
+                ->sortable()
+                ->label('Created By')
+                ->description(
+                    fn (Post $record): string => Carbon::parse($record->created_at)->diffForHumans()
+                )
+                ->searchable()
+                ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

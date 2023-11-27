@@ -9,7 +9,12 @@ use Filament\Tables\Table;
 
 use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Actions\DeleteAction;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NavigationResource\Pages;
 use App\Filament\Resources\NavigationResource\RelationManagers;
@@ -53,22 +58,27 @@ class NavigationResource extends Resource
     {
         return $table
             ->columns([
-                Filament\Tables\Columns\TextColumn::make('name')->label('Navigation')->searchable(),
-                Filament\Tables\Columns\TextColumn::make('sort'),
-                Filament\Tables\Columns\TextColumn::make('link'),
-                Filament\Tables\Columns\TextColumn::make('external_link'),
-                Filament\Tables\Columns\TextColumn::make('created_at')->since(),
+                TextColumn::make('name')->label('Navigation')->searchable(),
+                TextColumn::make('sort'),
+                TextColumn::make('link'),
+                TextColumn::make('external_link'),
+                TextColumn::make('created_at')->since(),
             ])
             ->filters([
-                Filament\Tables\Filters\SelectFilter::make('Site Owner')->relationship('site', 'name')->columnSpan(4),
-            ])
+                Filament\Tables\Filters\SelectFilter::make('site')
+                ->label("")
+                ->relationship('site', 'name', fn (Builder $query) => $query->orderBy('id'))
+                ->columnSpanFull(),
+            ],layout: FiltersLayout::AboveContent)
             ->actions([
-                Filament\Tables\Actions\EditAction::make(),
-                Filament\Tables\Actions\DeleteAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
-                Filament\Tables\Actions\DeleteBulkAction::make(),
-            ])->groups(['nav_parent.name']);
+                DeleteBulkAction::make(),
+            ])
+            ->reorderable('sort')
+            ->defaultGroup('nav_parent.name');
     }
     
     public static function getRelations(): array
@@ -82,8 +92,8 @@ class NavigationResource extends Resource
     {
         return [
             'index' => Pages\ListNavigations::route('/'),
-            'create' => Pages\CreateNavigation::route('/create'),
-            'edit' => Pages\EditNavigation::route('/{record}/edit'),
+            /* 'create' => Pages\CreateNavigation::route('/create'),
+            'edit' => Pages\EditNavigation::route('/{record}/edit'), */
         ];
     }    
 }

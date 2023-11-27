@@ -35,7 +35,7 @@ class Site extends Model
         'updated_by',
     ];
 
-    protected $hidden = ['is_main_site','is_active','created_by','updated_by','deleted_at'];
+    protected $hidden = ['is_active','created_by','updated_by','deleted_at'];
 
     protected $casts = [
         'is_main_site' => 'boolean',

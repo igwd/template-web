@@ -49,7 +49,7 @@
                                                 <path
                                                     d="M3.414 1A2 2 0 0 0 0 2.414v11.172A2 2 0 0 0 3.414 15L9 9.414a2 2 0 0 0 0-2.828L3.414 1Z" />
                                             </svg>
-                                            <a href="javascript:void(0)"
+                                            <a @click="scrollToDiv('{{$section['link_section']}}')"
                                                 data-target="{{ $section['link_section'] }}">{{ Formatting::getLang() == 'id' ? $section['label'] : $section['label_en'] }}</a>
                                         </li>
                                     @endforeach

@@ -35,27 +35,112 @@ html {
     background: #555;
 }
 
+/* Default styles for .card-zoom-news */
 .card-zoom-news {
     @apply relative flex items-center justify-center overflow-hidden shadow-xl w-full h-80 rounded;
 }
+
+/* Default styles for .card-zoom */
 .card-zoom {
     @apply relative flex items-center justify-center m-3 overflow-hidden shadow-xl w-60 md:w-96 h-60 rounded-xl;
 }
+
+/* Default styles for .card-zoom-image */
 .card-zoom-image {
     @apply absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
 }
+
+/* Default styles for .card-zoom-text */
 .card-zoom-text {
     @apply absolute bottom-1 text-xl font-bold text-center transition-all duration-500 ease-in-out transform scale-75 text-white opacity-60;
 }
+
+/* Hover styles for .card-zoom */
 .card-zoom:hover .card-zoom-image {
-    @apply scale-150;
+    @apply scale-100;
 }
+
 .card-zoom:hover .card-zoom-text {
     @apply scale-100;
 }
 
+/* Hover styles for .card-zoom-news */
 .card-zoom-news:hover .card-zoom-image {
     @apply scale-150;
 }
-  
-  
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .grid {
+        @apply grid-cols-1;
+    }
+    
+    .card-zoom {
+        @apply w-full;
+    }
+    
+    .card-zoom-image {
+        @apply scale-150;
+    }
+
+    .card-zoom:hover .card-zoom-image {
+        @apply scale-150;
+    }
+    
+    .card-zoom-text {
+        @apply scale-75;
+    }
+
+    .card-zoom-video {
+        @apply scale-150;
+    }
+}
+
+@media (min-width: 820px) and (max-width: 1366px) {
+    .grid {
+        @apply grid-cols-1;
+    }
+
+    .card-zoom {
+        @apply w-full;
+    }
+
+    .card-zoom:hover .card-zoom-image {
+        @apply scale-100;
+    }
+
+    .card-zoom-text {
+        @apply scale-50;
+    }
+
+    .card-zoom-video {
+        @apply scale-150;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+    .grid {
+        @apply grid-cols-1;
+    }
+
+    .card-zoom {
+        @apply w-full;
+    }
+
+    .card-zoom:hover .card-zoom-image {
+        @apply scale-150;
+    }
+
+    .card-zoom-text {
+        @apply scale-50;
+    }
+
+    .card-zoom-video {
+        @apply scale-150;
+    }
+}
+
+/* Default styles for .card-zoom-image */
+.card-zoom-video {
+    @apply absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover;
+}  

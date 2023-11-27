@@ -7,16 +7,21 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use App\Models\Announcement;
+use App\Models\MAnnouncement;
+use Filament\Forms\Components\Fieldset;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\MarkdownEditor;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\AnnouncementResource\Pages;
 use App\Filament\Resources\AnnouncementResource\RelationManagers;
 
 class AnnouncementResource extends Resource
 {
-    protected static ?string $model = Announcement::class;
+    protected static ?string $model = MAnnouncement::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
@@ -24,40 +29,42 @@ class AnnouncementResource extends Resource
 
     protected static ?string $navigationLabel = "Pengumuman";
 
+    protected static ?string $modelLabel = "Pengumuman";
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Fieldset::make('Thumbnail')
+                Fieldset::make('Thumbnail')
                 ->schema([
-                    Forms\Components\FileUpload::make('thumbnail')
+                    FileUpload::make('thumbnail')
                         ->label('Photo')
                         ->disk('announcement')
                         ->columnSpanFull(),
                 ]),
-                Forms\Components\TextInput::make('title')->label('Judul')
+                TextInput::make('title')->label('Judul')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('title_en')->label('Judul (en)')
+                TextInput::make('title_en')->label('Judul (en)')
                     ->maxLength(255),
-                Forms\Components\MarkdownEditor::make('content')
+                MarkdownEditor::make('content')
                 ->disableToolbarButtons(['attachFiles'])
                 ->columnSpanFull(),
-                Forms\Components\MarkdownEditor::make('content_en')
+                MarkdownEditor::make('content_en')
                 ->disableToolbarButtons(['attachFiles'])
                 ->columnSpanFull()
                 ->label('Content (en)'),
-                Forms\Components\Fieldset::make('Attachment')
+                Fieldset::make('Attachment')
                 ->schema([
-                    Forms\Components\FileUpload::make('attachment')
+                    FileUpload::make('attachment')
                     ->label('Upload Files')
                     ->disk('announcement')
                     ->multiple()
-                    ->enableDownload()
+                    ->downloadable()
                     ->columnSpanFull(),
                 ]),
-                Forms\Components\DateTimePicker::make('published_at')
+                DateTimePicker::make('published_at')
                 ->default(now())
                 ->columnSpanFull(),
             ]);
@@ -68,7 +75,7 @@ class AnnouncementResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->description(fn (Announcement $record): string => Str::words($record->content,8,"..."))
+                    ->description(fn (MAnnouncement $record): string => Str::words($record->content,8,"..."))
                     ->wrap()
                     ->searchable()
                     ->sortable(),
@@ -81,7 +88,7 @@ class AnnouncementResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                /* Tables\Actions\ViewAction::make(), */
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\ForceDeleteAction::make(),
