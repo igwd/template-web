@@ -17,7 +17,8 @@ class CreateGallery extends CreateRecord
         $data['created_at'] = now();
         $data['slug'] = Str::slug($data['title']);
         $data['thumbnail_meta_en'] = $data['title_en'];
-        $data['site_id'] = empty($data['site_id']) ? 0 : $data['site_id'];
+        $data['site_id'] = empty($data['site']) ? 0 : $data['site'];
+        $data['published_at'] = now();
         return $data;
     }
 

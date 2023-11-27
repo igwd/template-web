@@ -31,6 +31,7 @@ class MGallery extends Model
         'media_video',
         'media_video_thumb',
         'viewer',
+        'media_type',
         'published_at',
         'created_by',
         'updated_by',

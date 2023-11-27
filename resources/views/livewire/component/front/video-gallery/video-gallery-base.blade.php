@@ -4,7 +4,7 @@
         @if(!empty($medias))
         @foreach($medias as $row => $video)
         @php
-            $media = json_decode($video->media_video);
+            $media = !is_array($video->media_video) ? json_decode($video->media_video) : $video->media_video;
             $index = rand(0, count($media) - 1);  
         @endphp
             <div x-data="{ isLoading: true, isPlaying:false }" x-init="() => { setTimeout(() => { isLoading = false; }, 2000) }" class="card-zoom">

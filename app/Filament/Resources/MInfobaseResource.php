@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
-use App\Models\MInfobase;
+use App\Models\MInfoBase;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Tabs;
@@ -21,7 +21,7 @@ use App\Filament\Resources\MInfobaseResource\RelationManagers;
 
 class MInfobaseResource extends Resource
 {
-    protected static ?string $model = MInfobase::class;
+    protected static ?string $model = MInfoBase::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
