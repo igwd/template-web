@@ -50,7 +50,7 @@ class GalleryResource extends Resource
                 ]),
                 Fieldset::make('Content')
                 ->schema([
-                    Grid::make(2)->schema([
+                    Grid::make(1)->schema([
                         TextInput::make('title')
                         ->label('Judul'),
                         TextInput::make('title_en')

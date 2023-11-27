@@ -24,7 +24,7 @@ class EditGallery extends EditRecord
         $data['updated_by'] = auth()->id();
         $data['updated_at'] = now();
         $data['slug'] = Str::slug($data['title']);
-        $data['site_id'] = empty($data['site_id']) ? 0 : $data['site_id'];
+        $data['site_id'] = empty($data['site']) ? 0 : $data['site'];
         $record->update($data);
         return $record;
     }

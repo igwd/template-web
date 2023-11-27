@@ -62,7 +62,7 @@ class AdminPanelProvider extends PanelProvider
                 'Site Management',
                 'Access Control'
             ])
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            /* ->viteTheme('resources/css/filament/admin/theme.css') */
             ->spa();
     }
 

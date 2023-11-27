@@ -4,7 +4,7 @@
         @if(!empty($photos))
             @foreach($photos as $row =>$photo)
             @php
-                $media = json_decode($photo->media_photo);
+                $media = !is_array($photo->media_photo) ? json_decode($photo->media_photo) : $photo->media_photo;
                 $index = rand(0, count($media) - 1);  
             @endphp
             <a href="{{url('gallery/photo',$photo->slug)}}">
