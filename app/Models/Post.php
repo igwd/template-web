@@ -28,9 +28,18 @@ class Post extends Model
         'category_id',
         'tags',
         'tags_en',
+        'attachment',
         'published_at',
         'created_by',
         'updated_by'
+    ];
+
+    protected $hidden = [
+        'created_by','updated_by','deleted_at'
+    ];
+
+    protected $casts = [
+        'attachment' => 'array',
     ];
 
     public $timestamps = true;
@@ -49,6 +58,10 @@ class Post extends Model
         return $this->belongsTo('App\Models\Site','site_id','id');
     }
 
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id','id');
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
@@ -60,7 +73,10 @@ class Post extends Model
         });
     }
 
-    public function scopeEn($query){
+    public function scopeEn($query,$category_id){
+        if(!empty($category_id)){
+            $query->where('category_id',$category_id);   
+        }
         return $query->select(
             'slug_en as slug',
             'thumbnail',
@@ -68,10 +84,15 @@ class Post extends Model
             'title_en as title',
             'content_en as content',
             'tags_en as tags',
-            'published_at');
+            'attachment',
+            'category_id',
+            'published_at')->orderBy('published_at','desc');
     }
 
-    public function scopeId($query){
+    public function scopeId($query,$category_id){
+        if(!empty($category_id)){
+            $query->where('category_id',$category_id);   
+        }
         return $query->select(
             'slug',
             'thumbnail',
@@ -79,6 +100,8 @@ class Post extends Model
             'title',
             'content',
             'tags',
-            'published_at');
+            'attachment',
+            'category_id',
+            'published_at')->orderBy('published_at','desc');
     }
 }

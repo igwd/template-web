@@ -12,7 +12,7 @@
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
             @if(!empty($newsUpdate))
                 @foreach ($newsUpdate as $list)
-                    <a href="{{url('news/'.$list->slug)}}" wire:navigate>
+                    <a href="{{url($list->category->slug.'/'.$list->slug)}}" wire:navigate>
                         <li class="py-3 sm:py-4">
                             <div class="flex text-left space-x-4">
                                 <div class="flex-1 min-w-0">

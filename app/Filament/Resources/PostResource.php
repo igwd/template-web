@@ -11,17 +11,20 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Helpers\Formatting;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
@@ -29,7 +32,6 @@ use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\PostResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostResource\RelationManagers;
-use App\Helpers\Formatting;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PostResource extends Resource
@@ -38,14 +40,16 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
-    protected static ?string $navigationGroup = "Berita & Pengumuman";
+    protected static ?string $navigationGroup = "Posting";
 
     protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationLabel = "Berita";
 
+    protected static ?string $modelLabel = "Berita";
+
     public static function getNavigationBadge(): ?string {
-        return Post::get()->count();
+        return Post::where('category_id','1')->get()->count();
     }
 
     public static function form(Form $form): Form
@@ -73,10 +77,9 @@ class PostResource extends Resource
                             ->required(),
                             TagsInput::make('tags')
                             ->placeholder('')
+                            ->columnSpanFull()
                             ->helperText(new HtmlString('<small class="text-red-700">*) pisahkan dengan tanda (koma)</small>'))
                             ->separator(','),
-                            DateTimePicker::make('published_at')
-                            ->required()
                         ])->columnSpanFull()
                     ]),
                     Tabs\Tab::make('English (EN)')
@@ -112,21 +115,42 @@ class PostResource extends Resource
                     ]),
                 ])->columnSpanFull(),
                 Fieldset::make('Thumbnail')
-                    ->schema([
-                        FileUpload::make('thumbnail')
-                            ->label('Photo')
-                            ->disk('news')
-                            ->getUploadedFileNameForStorageUsing(
-                                fn (TemporaryUploadedFile $file, Get $get): string => (string) $get('slug').".".$file->getClientOriginalExtension()        
-                            )
-                            ->columnSpanFull(),
-                    ]),
+                ->schema([
+                    FileUpload::make('thumbnail')
+                        ->label('Photo')
+                        ->disk('news')
+                        ->getUploadedFileNameForStorageUsing(
+                            fn (TemporaryUploadedFile $file, Get $get): string => (string) $get('slug').".".$file->getClientOriginalExtension()        
+                        )
+                        ->columnSpanFull(),
+                ]),
+                Fieldset::make('Attachment')
+                ->schema([
+                    FileUpload::make('attachment')
+                    ->label('Upload Files')
+                    ->disk('news')
+                    ->multiple()
+                    ->downloadable()
+                    ->columnSpanFull(),
+                ]),
+                Fieldset::make('Published')
+                ->schema([
+                    Select::make('site_id')
+                    ->preload()
+                    ->relationship('site','name')
+                    ->label('')
+                    ->searchable(),
+                    DateTimePicker::make('published_at')
+                    ->label('')
+                    ->required()
+                ])
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->query(Post::where('category_id',1))
             ->columns([
                 ImageColumn::make('thumbnail')->disk('news'),
                 TextColumn::make('title')
@@ -138,7 +162,7 @@ class PostResource extends Resource
                 ->badge()
                 ->separator(',')
                 ->sortable(),
-                TextColumn::make('user_created.name')
+                /* TextColumn::make('user_created.name')
                 ->searchable()
                 ->sortable()
                 ->label('Created By')
@@ -146,11 +170,15 @@ class PostResource extends Resource
                     fn (Post $record): string => Carbon::parse($record->created_at)->diffForHumans()
                 )
                 ->searchable()
-                ->sortable(),
+                ->sortable(), */
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
+                Tables\Filters\SelectFilter::make('site')
+                ->label("")
+                ->relationship('site', 'name', fn (Builder $query) => $query->where('id','<>',0)->orderBy('id')),
+                Tables\Filters\TrashedFilter::make()
+                ->label(''),
+            ],layout: FiltersLayout::AboveContent)->filtersFormColumns(2)
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -161,7 +189,7 @@ class PostResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
-            ]);
+            ])->paginated([5,10, 25, 50, 100, 'all']);
     }
     
     public static function getRelations(): array

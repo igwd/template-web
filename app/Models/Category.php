@@ -16,4 +16,10 @@ class Category extends Model
     public $timestamps = true;
 
     protected $dates = ['deleted_at'];
+
+    protected $fillable = [
+        'slug',
+        'category',
+        'components'
+    ];
 }

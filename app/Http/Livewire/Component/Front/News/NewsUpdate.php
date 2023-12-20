@@ -19,10 +19,10 @@ class NewsUpdate extends Component
 
     public function mount($slug=null, $post=null){
         $this->slug = $slug;
-        $this->displayed = Post::whereNotNull('published_at')
-        ->latest()
+        $this->displayed = Post::id('1')
+        ->whereNotNull('published_at')
+        ->latest('published_at')
         ->first();
-
         if(!empty($post)){
             $this->displayed = Post::where('slug',$post)->first();
         }
@@ -33,31 +33,33 @@ class NewsUpdate extends Component
         $site_slug = $this->slug;
         $start = ($this->currentPage - 1) * $this->perPage;
         if(Formatting::getLang() == 'en'){
-            $data = Post::en()->whereHas('site',function($query) use ($site_slug){
+            $data = Post::en('1')->with('category')->whereHas('site',function($query) use ($site_slug){
                 if(!empty($site_slug)){
                     $query->where('slug',$site_slug);
                 }else{
                     $query->where('is_main_site',1);
                 }
             })
-            ->whereNotNull('published_at')
+            ->where(function ($query) {
+                $query->whereNotNull('published_at')->orWhere('site_id', 0);
+            })
             ->where('id','<>',$this->displayed->id)
-            ->orWhere('site_id',0)
             ->skip($start)
             ->take($this->perPage)
             ->orderBy('published_at','desc')
             ->get();
         }else{
-            $data = Post::id()->whereHas('site',function($query) use ($site_slug){
+            $data = Post::id('1')->with('category')->whereHas('site',function($query) use ($site_slug){
                 if(!empty($site_slug)){
                     $query->where('slug',$site_slug);
                 }else{
                     $query->where('is_main_site',1);
                 }
             })
-            ->whereNotNull('published_at')
+            ->where(function ($query) {
+                $query->whereNotNull('published_at')->orWhere('site_id', 0);
+            })
             ->where('id','<>',$this->displayed->id)
-            ->orWhere('site_id',0)
             ->skip($start)
             ->take($this->perPage)
             ->orderBy('published_at','desc')

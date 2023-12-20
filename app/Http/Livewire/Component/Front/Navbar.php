@@ -24,7 +24,13 @@ class Navbar extends Component
             }else{
                 $query->where('is_main_site',1);
             }
-        })->first()->toArray();
+        })->first();
+
+        if(empty($this->site->id)){
+            return abort('404');
+        }
+        
+        $this->site = $this->site->toArray();
         
         $data = Navigation::whereHas('site', function ($query) use ($slug) {
             if(!empty($slug)){

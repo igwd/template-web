@@ -57,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->navigationGroups([
-                'Berita & Pengumuman',
+                'Posting',
                 'Galeri',
                 'Site Management',
                 'Access Control'

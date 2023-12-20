@@ -16,28 +16,30 @@ class NewsBase extends Component
         $lang = Formatting::getLang();
         $this->slug = $slug;
         if($lang == 'en'){
-            $this->news = Post::en()->whereHas('site',function($query) use($slug){
+            $this->news = Post::en('1')->with('category')->whereHas('site',function($query) use($slug){
                 if(!empty($slug)){
                     $query->where('slug',$slug);
                 }else{
                     $query->where('is_main_site',1);
                 }
             })
-            ->whereNotNull('published_at')
-            ->orWhere('site_id',0)
-            ->latest()
+            ->where(function ($query) {
+                $query->whereNotNull('published_at')->orWhere('site_id', 0);
+            })
+            ->latest('published_at')
             ->first();
         }else{
-            $this->news = Post::id()->whereHas('site',function($query) use($slug){
+            $this->news = Post::id('1')->with('category')->whereHas('site',function($query) use($slug){
                 if(!empty($slug)){
                     $query->where('slug',$slug);
                 }else{
                     $query->where('is_main_site',1);
                 }
             })
-            ->whereNotNull('published_at')
-            ->orWhere('site_id',0)
-            ->latest()
+            ->where(function ($query) {
+                $query->whereNotNull('published_at')->orWhere('site_id', 0);
+            })
+            ->latest('published_at')
             ->first();
         }
     }

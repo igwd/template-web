@@ -2,6 +2,7 @@
 namespace App\Helpers;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 
 class Formatting{
@@ -40,6 +41,23 @@ class Formatting{
         return $branch;
     }
 
+    static function navigationTree($elements,$parentId = 0, $field='parent_id'){
+        $branch = array();
+        foreach ($elements as $element) {
+            $element['slug'] = Str::slug($element['name']);
+            if ($element[$field] == $parentId) {
+                $children = self::generateTree($elements, $element['id'],$field);
+                if ($children) {
+                    $element['children'] = $children;
+                } else {
+                    $element['children'] = [];
+                }
+                $branch[] = $element;
+            }
+        }
+        return $branch;
+    }
+
     static function getLang(){
         return Cookie::get('language', 'id');
     }
@@ -48,5 +66,28 @@ class Formatting{
         if($slug){
             
         }
+    }
+
+    static function makeUniqueSlug($table,$field,$originalSlug,$id=null)
+    {
+        $slug = $originalSlug;
+        $count = 1;
+    
+        $query = DB::table($table)
+        ->where(function ($query) use ($field, $slug) {
+            $query->where($field, 'LIKE', '%' . $slug . '%');
+        });
+
+        // Exclude the record with the specified ID
+        if ($id !== null) {
+            $query->where('id', '!=', $id);
+        }
+
+        if($query->get()->count() > 0) {
+            $count += $query->get()->count();
+            $slug = $originalSlug . '-' . $count;
+        }
+
+        return $slug;
     }
 }

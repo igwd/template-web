@@ -35,12 +35,21 @@
                         style="max-height: 100px; overflow: hidden; text-overflow: ellipsis; ">
                         {{Formatting::limitWords($news->content, 100, '...')}}
                     </p>
+                    @if(!empty($slug))
                     <a
-                        href="{{url('news/'.$news->slug)}}" 
+                        href="{{url($slug.'/'.$news->category->slug.'/'.$news->slug)}}" 
                         wire:navigate
                         class=" mt-5 p-2 text-sm bg-transparent hover:bg-blue-500 text-gray-500 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded">
                         {{(Formatting::getLang()=="en" ? "Read more" : "Selengkapnya")}}
                     </a>
+                    @else
+                    <a
+                        href="{{url($news->category->slug.'/'.$news->slug)}}" 
+                        wire:navigate
+                        class=" mt-5 p-2 text-sm bg-transparent hover:bg-blue-500 text-gray-500 font-semibold hover:text-white px-4 border border-blue-500 hover:border-transparent rounded">
+                        {{(Formatting::getLang()=="en" ? "Read more" : "Selengkapnya")}}
+                    </a>
+                    @endif
                 </div>
                 @endif
             </div>

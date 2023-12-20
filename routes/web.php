@@ -21,7 +21,7 @@ Route::get('/teknik-komputer/dosen', App\Http\Livewire\Component\Front\Dosen::cl
 
 Route::get('/', App\Http\Livewire\Component\Front\Homepage::class)->name('home');
 
-Route::get('site/{slug}', App\Http\Livewire\Component\Front\SiteComponent::class)->name('site');
+Route::get('/{slug}', App\Http\Livewire\Component\Front\SiteComponent::class)->name('site');
 
 Route::get('switchs/{lang}',[App\Http\Controllers\LanguageController::class, 'switchLang'])->name('switch.lang.old');
 
@@ -33,5 +33,5 @@ Route::get('switch/{lang}', function($lang){
     return redirect()->back()->withCookie($forgetCookie)->withCookie($newCookie);
 })->name('switch.lang');
 
-Route::get('/news/{slug}',App\Http\Livewire\Component\Front\News\Posts::class)->name('news');
-Route::get('site/{site}/news/{slug}',App\Http\Livewire\Component\Front\News\Posts::class)->name('news.post');
+Route::get('/post/{slug}',App\Http\Livewire\Component\Front\News\Posts::class)->name('post');
+Route::get('{site}/post/{slug}',App\Http\Livewire\Component\Front\News\Posts::class)->name('site.post');

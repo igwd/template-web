@@ -6,6 +6,7 @@ use Filament\Pages\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\NavigationResource;
+use App\Models\Navigation;
 
 class CreateNavigation extends CreateRecord
 {
@@ -14,6 +15,17 @@ class CreateNavigation extends CreateRecord
     protected function getRedirectUrl(): string 
     {
         return $this->getResource()::getUrl('index');
+    }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $site_id = $data['site_id'];
+        $navigations = $data['subjects'];
+        dd($data);
+        foreach($navigations as $row => $value){
+            $menu = new Navigation();
+            
+        }
     }
 
     protected function getCreatedNotification(): ? Notification

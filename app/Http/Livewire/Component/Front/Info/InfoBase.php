@@ -21,34 +21,35 @@ class InfoBase extends Component
             }else{
                 $query->where('is_main_site', 1);
             }
-        })->first()->toArray();
+        })->first();
         
-        $this->infobase['sections'] = json_decode($this->infobase['sections'],true);
-
-        $this->infobase['sections'] = array_map(function ($section) {
-            unset($section['description_en']);
-            return $section;
-        }, $this->infobase['sections']);
-        
-        if($this->lang == 'en'){
-            $this->infobase = MInfoBase::en()->whereHas('site', function ($query) use($slug) {
-                if(!empty($slug)){
-                    $query->where('slug', $slug);
-                }else{
-                    $query->where('is_main_site', 1);
-                }
-            })->first()->toArray();
-
+        if(!empty($this->infobase)){
+            $this->infobase = $this->infobase->toArray();
             $this->infobase['sections'] = json_decode($this->infobase['sections'],true);
-
             $this->infobase['sections'] = array_map(function ($section) {
-                $section['description'] = $section['description_en'];
                 unset($section['description_en']);
                 return $section;
             }, $this->infobase['sections']);
+        
+            if($this->lang == 'en'){
+                $this->infobase = MInfoBase::en()->whereHas('site', function ($query) use($slug) {
+                    if(!empty($slug)){
+                        $query->where('slug', $slug);
+                    }else{
+                        $query->where('is_main_site', 1);
+                    }
+                })->first()->toArray();
+    
+                $this->infobase['sections'] = json_decode($this->infobase['sections'],true);
+    
+                $this->infobase['sections'] = array_map(function ($section) {
+                    $section['description'] = $section['description_en'];
+                    unset($section['description_en']);
+                    return $section;
+                }, $this->infobase['sections']);
+            }
+            $this->infobase['background'] = Storage::disk('infobase')->url($this->infobase['background']);
         }
-        $this->infobase['background'] = Storage::disk('infobase')->url($this->infobase['background']);
-
     }
 
     public function render()

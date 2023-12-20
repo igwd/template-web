@@ -8,7 +8,7 @@
             $index = rand(0, count($media) - 1);  
         @endphp
             <div x-data="{ isLoading: true, isPlaying:false }" x-init="() => { setTimeout(() => { isLoading = false; }, 2000) }" class="card-zoom">
-                <div x-bind:class="{ 'hidden': isPlaying }" x-show="!isPlaying" class="aspect-w-16 aspect-h-9 bg-gray-300 animate-pulse">
+                <div x-bind:class="{ 'hidden': isPlaying }" x-show="!isPlaying" class="card-zoom-image aspect-w-16 aspect-h-9 bg-gray-300 animate-pulse">
                     <!-- Display video thumbnail -->
                     <img src="{{Storage::disk('gallery_video')->url($video->media_video_thumb)}}" alt="{{$video->slug}}" class="aspect-w-16 aspect-h-9 object-cover">
                     <button @click="isPlaying = true" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
@@ -23,7 +23,7 @@
                        @ended="isPlaying = false; $refs.videoPlayer.currentTime = 0" 
                        x-show="isPlaying"
                        x-bind:class="{ 'hidden': !isPlaying }"
-                       class="card-zoom-image mtz-vlc-ihack" alt="{{$video->slug}}" controls>
+                       class="card-zoom-image mtz-vlc-ihack object-cover w-full h-full" alt="{{$video->slug}}" controls>
                     <source src="{{Storage::disk('gallery_video')->url($media[$index])}}" type="video/mp4">
                 </video>     
             </div>

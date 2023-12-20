@@ -14,26 +14,48 @@ class Announcement extends Component
     public $announcements;
     public $perPage = 4;
     public $currentPage = 1;
-    public $loading;
+    public $loading, $displayed, $slug;
 
-    public function mount($slug=null){
-        
+    public function mount($slug=null, $post=null){
+        $this->slug = $slug;
+
+        if(!empty($post)){
+            $this->displayed = MAnnouncement::where('slug',$post)->first();
+        }
     }
 
     public function render()
     {
+        $site_slug = $this->slug;
         $start = ($this->currentPage - 1) * $this->perPage;
-        $data = MAnnouncement::id()->whereNotNull('published_at')
-                ->skip($start)
-                ->take($this->perPage)
-                ->orderBy('published_at','desc')
-                ->get();
+        $data = MAnnouncement::id('2')
+            ->with('category')
+            ->whereHas('site',function($query) use ($site_slug){
+                if(!empty($site_slug)){
+                    $query->where('slug',$site_slug);
+                }else{
+                    $query->where('is_main_site',1);
+                }
+                $query->orWhere('site_id', 0);
+            })
+            ->whereNotNull('published_at')
+            ->skip($start)
+            ->take($this->perPage)
+            ->get();
         
         if(Formatting::getLang() == "en"){
-            $data = MAnnouncement::en()->whereNotNull('published_at')
+            $data = MAnnouncement::en('2')
+                ->with('category')->whereHas('site',function($query) use ($site_slug){
+                    if(!empty($site_slug)){
+                        $query->where('slug',$site_slug);
+                    }else{
+                        $query->where('is_main_site',1);
+                    }
+                    $query->orWhere('site_id', 0);
+                })
+                ->whereNotNull('published_at')
                 ->skip($start)
                 ->take($this->perPage)
-                ->orderBy('published_at','desc')
                 ->get();
         }
         $this->announcements = $data;
