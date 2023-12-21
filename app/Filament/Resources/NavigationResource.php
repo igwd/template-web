@@ -37,6 +37,11 @@ class NavigationResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -67,7 +72,7 @@ class NavigationResource extends Resource
                     ->labelKey('name')
                     ->addAction(fn (Action $action): Action => $action->icon('heroicon-o-plus')->color('primary')->label('Add Menu Item'))
                     ->deleteAction(fn (Action $action): Action => $action->requiresConfirmation())
-                    ->maxDepth(2)
+                    ->maxDepth(3)
                 ]),
             ]);
     }
@@ -75,6 +80,7 @@ class NavigationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(Site::where('id','<>',0))
             ->columns([
                 TextColumn::make('name')->label('Site')->searchable(),
                 TextColumn::make('created_at')->since(),
